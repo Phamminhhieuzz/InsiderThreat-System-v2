@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, Input, Select, Popconfirm, Tag, Space, Avatar, App } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, UserOutlined, CameraOutlined, TeamOutlined, WarningOutlined, FileTextOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import FaceRegistrationModal from '../components/FaceRegistrationModal';
 import LeftSidebar from '../components/LeftSidebar';
 import BottomNavigation from '../components/BottomNavigation';
@@ -16,6 +17,7 @@ import './UsersPage.css';
 const { Option } = Select;
 
 function UsersPage() {
+    const { t } = useTranslation();
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -49,7 +51,7 @@ function UsersPage() {
             const data = await api.get<User[]>('/api/users');
             setUsers(data);
         } catch (error) {
-            message.error('Lỗi tải danh sách người dùng!');
+            message.error(t('users_admin.fetch_users_fail', 'Lỗi tải danh sách người dùng!'));
         } finally {
             setLoading(false);
         }
@@ -69,7 +71,7 @@ function UsersPage() {
             setReports(data);
         } catch (error: any) {
             if (error?.response?.status !== 403) {
-                message.error('Lỗi tải danh sách báo cáo!');
+                message.error(t('users_admin.fetch_reports_fail', 'Lỗi tải danh sách báo cáo!'));
             }
         } finally {
             setLoadingReports(false);
@@ -101,12 +103,12 @@ function UsersPage() {
             // Hiển thị đúng thông báo server trả về thay vì câu mặc định.
             // api.delete đã bóc sẵn phần data nên dùng trực tiếp, không có res.data.
             const res = await api.delete<{ message?: string; Message?: string }>(`/api/users/${id}`);
-            message.success(res?.message || res?.Message || 'Đã xóa người dùng thành công');
+            message.success(res?.message || res?.Message || t('users_admin.delete_success', 'Đã xóa người dùng thành công'));
             fetchUsers();
         } catch (error: any) {
             // Nêu rõ lý do thật từ server thay vì nuốt mất và báo chung chung.
             const serverMessage = error?.response?.data?.message || error?.response?.data?.Message;
-            message.error(serverMessage || 'Lỗi khi xóa người dùng');
+            message.error(serverMessage || t('users_admin.delete_fail', 'Lỗi khi xóa người dùng'));
         }
     };
 
@@ -126,11 +128,11 @@ function UsersPage() {
             if (editingUser && editingUser.id) {
                 // Update
                 await api.put(`/api/users/${editingUser.id}`, values);
-                message.success('Cập nhật người dùng thành công');
+                message.success(t('users_admin.update_success', 'Cập nhật người dùng thành công'));
             } else {
                 // Create
                 await api.post('/api/users', values);
-                message.success('Tạo người dùng mới thành công');
+                message.success(t('users_admin.create_success', 'Tạo người dùng mới thành công'));
             }
 
             setIsModalVisible(false);
@@ -140,13 +142,13 @@ function UsersPage() {
                 // Validate error
                 return;
             }
-            message.error(error.response?.data?.message || 'Có lỗi xảy ra');
+            message.error(error.response?.data?.message || t('users_admin.generic_error', 'Có lỗi xảy ra'));
         }
     };
 
     const columns: ColumnsType<User> = [
         {
-            title: 'Họ tên',
+            title: t('users_admin.col_fullname', 'Họ tên'),
             dataIndex: 'fullName',
             key: 'fullName',
             render: (text) => (
@@ -157,17 +159,17 @@ function UsersPage() {
             )
         },
         {
-            title: 'Tên đăng nhập',
+            title: t('users_admin.col_username', 'Tên đăng nhập'),
             dataIndex: 'username',
             key: 'username',
         },
         {
-            title: 'Email',
+            title: t('users_admin.col_email', 'Email'),
             dataIndex: 'email',
             key: 'email',
         },
         {
-            title: 'Vai trò',
+            title: t('users_admin.col_role', 'Vai trò'),
             dataIndex: 'role',
             key: 'role',
             render: (role) => {
@@ -184,30 +186,30 @@ function UsersPage() {
             }
         },
         {
-            title: 'Phòng ban',
+            title: t('users_admin.col_department', 'Phòng ban'),
             dataIndex: 'department',
             key: 'department',
         },
         {
-            title: 'Face ID',
+            title: t('users_admin.col_faceid', 'Face ID'),
             key: 'faceId',
             render: (_, record) => {
                 const isRegistered = (record.faceEmbeddings && record.faceEmbeddings.length > 0) || !!record.faceImageUrl;
                 return (
                     <Tag color={isRegistered ? 'success' : 'default'} icon={isRegistered ? <CheckCircleOutlined /> : <CloseCircleOutlined />}>
-                        {isRegistered ? 'Đã đăng ký' : 'Chưa đăng ký'}
+                        {isRegistered ? t('users_admin.faceid_registered', 'Đã đăng ký') : t('users_admin.faceid_not_registered', 'Chưa đăng ký')}
                     </Tag>
                 );
             }
         },
         {
-            title: 'Thao tác',
+            title: t('users_admin.col_action', 'Thao tác'),
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
                     <Button
                         icon={<CameraOutlined />}
-                        title="Đăng ký Face ID"
+                        title={t('users_admin.register_faceid', 'Đăng ký Face ID')}
                         onClick={() => handleRegisterFace(record)}
                     />
                     <Button
@@ -215,10 +217,10 @@ function UsersPage() {
                         onClick={() => handleEdit(record)}
                     />
                     <Popconfirm
-                        title="Bạn có chắc muốn xóa tài khoản này?"
+                        title={t('users_admin.confirm_delete_title', 'Bạn có chắc muốn xóa tài khoản này?')}
                         onConfirm={() => record.id && handleDelete(record.id)}
-                        okText="Xóa"
-                        cancelText="Hủy"
+                        okText={t('users_admin.confirm_delete_ok', 'Xóa')}
+                        cancelText={t('users_admin.confirm_delete_cancel', 'Hủy')}
                     >
                         <Button
                             danger
@@ -242,7 +244,7 @@ function UsersPage() {
                 <div className="usersHeader">
                     <div className="title-section">
                         <span className="material-symbols-outlined header-icon-main">group</span>
-                        <h1>Quản lý Nhân viên</h1>
+                        <h1>{t('users_admin.title', 'Quản lý Nhân viên')}</h1>
                     </div>
                     {isMobile ? (
                         <div className="add-btn-container">
@@ -257,7 +259,7 @@ function UsersPage() {
                         </div>
                     ) : (
                         <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-                            Thêm nhân viên
+                            {t('users_admin.add_employee', 'Thêm nhân viên')}
                         </Button>
                     )}
                 </div>
@@ -282,13 +284,13 @@ function UsersPage() {
                                 </div>
                                 <div className="card-body-row">
                                     <span className="material-symbols-outlined dept-icon">corporate_fare</span>
-                                    <span>Phòng ban: {u.department || 'Chưa cập nhật'}</span>
+                                    <span>{t('users_admin.col_department', 'Phòng ban')}: {u.department || t('users_admin.not_updated', 'Chưa cập nhật')}</span>
                                 </div>
                                 <div className="card-body-row">
                                     <span className={`material-symbols-outlined status-icon ${(u.faceEmbeddings && u.faceEmbeddings.length > 0) || u.faceImageUrl ? 'success' : 'warn'}`}>
                                         {(u.faceEmbeddings && u.faceEmbeddings.length > 0) || u.faceImageUrl ? 'verified_user' : 'face'}
                                     </span>
-                                    <span>Face ID: {(u.faceEmbeddings && u.faceEmbeddings.length > 0) || u.faceImageUrl ? 'Đã đăng ký' : 'Chưa đăng ký'}</span>
+                                    <span>{t('users_admin.col_faceid', 'Face ID')}: {(u.faceEmbeddings && u.faceEmbeddings.length > 0) || u.faceImageUrl ? t('users_admin.faceid_registered', 'Đã đăng ký') : t('users_admin.faceid_not_registered', 'Chưa đăng ký')}</span>
                                 </div>
                                 <div className="card-footer-row">
                                     <div className="action-buttons-wrap">
@@ -300,10 +302,10 @@ function UsersPage() {
                                         </button>
                                     </div>
                                     <Popconfirm
-                                        title="Bạn có chắc muốn xóa tài khoản này?"
+                                        title={t('users_admin.confirm_delete_title', 'Bạn có chắc muốn xóa tài khoản này?')}
                                         onConfirm={() => u.id && handleDelete(u.id)}
-                                        okText="Xóa"
-                                        cancelText="Hủy"
+                                        okText={t('users_admin.confirm_delete_ok', 'Xóa')}
+                                        cancelText={t('users_admin.confirm_delete_cancel', 'Hủy')}
                                         disabled={u.username === 'admin'}
                                     >
                                         <button className={`mock-action-btn delete ${u.username === 'admin' ? 'disabled' : ''}`} disabled={u.username === 'admin'}>
@@ -327,7 +329,7 @@ function UsersPage() {
                 <div className="reports-section-mock">
                     <div className="section-title-mock">
                         <span className="material-symbols-outlined report-icon-mock">description</span>
-                        <h2>Báo cáo vi phạm</h2>
+                        <h2>{t('users_admin.reports_title', 'Báo cáo vi phạm')}</h2>
                     </div>
 
                     {isMobile ? (
@@ -335,7 +337,7 @@ function UsersPage() {
                             <div className="empty-box-wrap">
                                 <span className="material-symbols-outlined">inventory_2</span>
                             </div>
-                            <p>Trống</p>
+                            <p>{t('users_admin.reports_empty', 'Trống')}</p>
                         </div>
                     ) : (
                         <Table
@@ -346,7 +348,7 @@ function UsersPage() {
                             scroll={{ x: 'max-content' }}
                         >
                             <Table.Column
-                                title="Bài viết"
+                                title={t('users_admin.col_post', 'Bài viết')}
                                 dataIndex="postId"
                                 key="postId"
                                 width={200}
@@ -357,32 +359,32 @@ function UsersPage() {
                                         rel="noopener noreferrer"
                                         style={{ color: '#1890ff', textDecoration: 'underline' }}
                                     >
-                                        Xem bài viết #{postId.slice(-8)}
+                                        {t('users_admin.view_post', 'Xem bài viết')} #{postId.slice(-8)}
                                     </a>
                                 )}
                             />
                             <Table.Column
-                                title="Người báo cáo"
+                                title={t('users_admin.col_reporter', 'Người báo cáo')}
                                 dataIndex="reporterName"
                                 key="reporterName"
                                 width={150}
                             />
                             <Table.Column
-                                title="Lý do"
+                                title={t('users_admin.col_reason', 'Lý do')}
                                 dataIndex="reason"
                                 key="reason"
                                 ellipsis
                                 width={250}
                             />
                             <Table.Column
-                                title="Thời gian"
+                                title={t('users_admin.col_time', 'Thời gian')}
                                 dataIndex="createdAt"
                                 key="createdAt"
                                 width={160}
                                 render={(date: string) => new Date(date).toLocaleString('vi-VN')}
                             />
                             <Table.Column
-                                title="Trạng thái"
+                                title={t('users_admin.col_status', 'Trạng thái')}
                                 dataIndex="status"
                                 key="status"
                                 width={120}
@@ -397,16 +399,16 @@ function UsersPage() {
                                 }}
                             />
                             <Table.Column
-                                title="Hành động"
+                                title={t('users_admin.col_action', 'Thao tác')}
                                 key="action"
                                 width={150}
                                 render={(_, record: any) => (
                                     <Space>
                                         <Button size="small" type="primary">
-                                            Xử lý
+                                            {t('users_admin.resolve', 'Xử lý')}
                                         </Button>
                                         <Button size="small" danger>
-                                            Bỏ qua
+                                            {t('users_admin.dismiss', 'Bỏ qua')}
                                         </Button>
                                     </Space>
                                 )}
@@ -418,7 +420,7 @@ function UsersPage() {
 
             {/* Add/Edit User Modal */}
             <Modal
-                title={editingUser ? "Chỉnh sửa nhân viên" : "Thêm nhân viên mới"}
+                title={editingUser ? t('users_admin.modal_edit_title', 'Chỉnh sửa nhân viên') : t('users_admin.modal_add_title', 'Thêm nhân viên mới')}
                 open={isModalVisible}
                 onOk={handleOk}
                 onCancel={() => setIsModalVisible(false)}
@@ -429,39 +431,39 @@ function UsersPage() {
                 >
                     <Form.Item
                         name="fullName"
-                        label="Họ tên"
-                        rules={[{ required: true, message: 'Vui lòng nhập họ tên!' }]}
+                        label={t('users_admin.col_fullname', 'Họ tên')}
+                        rules={[{ required: true, message: t('users_admin.form_fullname_required', 'Vui lòng nhập họ tên!') }]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
                         name="username"
-                        label="Tên đăng nhập"
-                        rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập!' }]}
+                        label={t('users_admin.col_username', 'Tên đăng nhập')}
+                        rules={[{ required: true, message: t('users_admin.form_username_required', 'Vui lòng nhập tên đăng nhập!') }]}
                     >
                         <Input disabled={!!editingUser} />
                     </Form.Item>
                     <Form.Item
                         name="email"
-                        label="Email"
+                        label={t('users_admin.col_email', 'Email')}
                         rules={[
-                            { required: true, message: 'Vui lòng nhập email!' },
-                            { type: 'email', message: 'Email không hợp lệ!' }
+                            { required: true, message: t('users_admin.form_email_required', 'Vui lòng nhập email!') },
+                            { type: 'email', message: t('users_admin.form_email_invalid', 'Email không hợp lệ!') }
                         ]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
                         name="passwordHash"
-                        label={editingUser ? "Mật khẩu mới (để trống nếu không đổi)" : "Mật khẩu"}
-                        rules={[{ required: !editingUser, message: 'Vui lòng nhập mật khẩu!' }]}
+                        label={editingUser ? t('users_admin.form_password_label_edit', 'Mật khẩu mới (để trống nếu không đổi)') : t('users_admin.form_password_label_add', 'Mật khẩu')}
+                        rules={[{ required: !editingUser, message: t('users_admin.form_password_required', 'Vui lòng nhập mật khẩu!') }]}
                     >
                         <Input.Password />
                     </Form.Item>
                     <Form.Item
                         name="role"
-                        label="Vai trò"
-                        rules={[{ required: true, message: 'Vui lòng chọn vai trò!' }]}
+                        label={t('users_admin.col_role', 'Vai trò')}
+                        rules={[{ required: true, message: t('users_admin.form_role_required', 'Vui lòng chọn vai trò!') }]}
                     >
                         <Select>
                             <Option value="Admin">Admin</Option>
@@ -472,8 +474,8 @@ function UsersPage() {
                     </Form.Item>
                     <Form.Item
                         name="department"
-                        label="Phòng ban"
-                        rules={[{ required: true, message: 'Vui lòng chọn phòng ban!' }]}
+                        label={t('users_admin.col_department', 'Phòng ban')}
+                        rules={[{ required: true, message: t('users_admin.form_department_required', 'Vui lòng chọn phòng ban!') }]}
                     >
                         <Select>
                             {DEPARTMENTS.map(dept => (
