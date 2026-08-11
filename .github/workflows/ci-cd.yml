@@ -1,0 +1,128 @@
+name: CI/CD
+
+# Chạy trên mọi push vào main và mọi Pull Request nhắm vào main.
+# CI: bắt lỗi build/bảo mật TRƯỚC khi deploy.
+# CD: chỉ gọi Render deploy SAU KHI mọi bước CI ở trên đã pass — Render
+# Auto-Deploy phải được TẮT thủ công trên dashboard, nếu không Render vẫn
+# tự deploy song song, khiến bước chặn ở đây trở nên vô nghĩa.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Build backend (.NET)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore src/InsiderThreat.Server/InsiderThreat.Server.csproj
+
+      - name: Build
+        run: dotnet build src/InsiderThreat.Server/InsiderThreat.Server.csproj -c Release --no-restore
+
+  frontend:
+    name: Build frontend (Vite)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/InsiderThreat.Web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: src/InsiderThreat.Web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check and build
+        run: npm run build
+
+  secret-scan:
+    name: Secret scan (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Chỉ lấy commit mới nhất, KHÔNG kéo toàn bộ lịch sử. Repo này từng
+          # có secret thật nằm trong các commit cũ (mật khẩu mặc định, JWT key
+          # cứng trong appsettings.json) — quét cả lịch sử sẽ báo đỏ vĩnh viễn
+          # vì secret cũ đã biết, che mất cảnh báo cho secret MỚI bị lộ.
+          # Dọn lịch sử cũ là việc rewrite git riêng, không phải việc của CI.
+          fetch-depth: 1
+
+      - name: Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_SUMMARY: true
+
+  codeql:
+    name: CodeQL (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: csharp
+            build-mode: manual
+          - language: javascript-typescript
+            build-mode: none
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      - uses: actions/setup-dotnet@v4
+        if: matrix.language == 'csharp'
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Build backend for analysis
+        if: matrix.language == 'csharp'
+        run: dotnet build src/InsiderThreat.Server/InsiderThreat.Server.csproj -c Release
+
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
+
+  deploy:
+    name: Deploy to Render
+    runs-on: ubuntu-latest
+    # Chỉ deploy khi push thẳng vào main (không chạy trên Pull Request), và chỉ
+    # sau khi build backend/frontend, quét secret, và CodeQL đều pass. Một job
+    # nào ở trên fail thì bước này không chạy — code lỗi không lên production.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [backend, frontend, secret-scan, codeql]
+    steps:
+      - name: Trigger Render deploy — backend
+        run: |
+          if [ -z "${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}" ]; then
+            echo "::error::Thiếu secret RENDER_DEPLOY_HOOK_BACKEND. Vào Settings > Secrets and variables > Actions để thêm."
+            exit 1
+          fi
+          curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}"
+
+      - name: Trigger Render deploy — frontend
+        run: |
+          if [ -z "${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}" ]; then
+            echo "::error::Thiếu secret RENDER_DEPLOY_HOOK_FRONTEND. Vào Settings > Secrets and variables > Actions để thêm."
+            exit 1
+          fi
+          curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}"

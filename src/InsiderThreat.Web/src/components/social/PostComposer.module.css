@@ -1,0 +1,120 @@
+.composer {
+    background-color: var(--card-bg);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px var(--card-shadow);
+}
+
+.composer :global(.ant-card-body) {
+    padding: 12px 16px;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.textarea {
+    flex: 1;
+    background-color: var(--bg-tertiary);
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-size: 15px;
+}
+
+.textarea:hover,
+.textarea:focus {
+    background-color: var(--bg-hover);
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 12px 0;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.action:hover {
+    background-color: var(--bg-hover);
+}
+
+@media (max-width: 640px) {
+    .actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pollSection {
+    padding: 12px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    margin: 8px 16px;
+    border: 1px dashed var(--border-color);
+}
+
+.pollHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.pollTitle {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.pollClose {
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.2s;
+}
+
+.pollClose:hover {
+    color: #ff4d4f;
+}
+
+.pollOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pollOptionInput {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.removeOption {
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.2s;
+}
+
+.removeOption:hover {
+    color: #ff4d4f;
+}

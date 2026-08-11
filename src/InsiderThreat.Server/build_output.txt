@@ -1,0 +1,27 @@
+﻿  Determining projects to restore...
+  All projects are up-to-date for restore.
+  InsiderThreat.Shared -> C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Shared\bin\Debug\net8.0\InsiderThreat.Shared.dll
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(98,19): warning CS8618: Non-nullable property 'User' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(99,19): warning CS8618: Non-nullable property 'Content' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(88,19): warning CS8618: Non-nullable property 'Id' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(89,19): warning CS8618: Non-nullable property 'Name' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(90,19): warning CS8618: Non-nullable property 'AccessCode' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(91,19): warning CS8618: Non-nullable property 'Description' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Controllers\MessagesController.cs(147,68): warning CS8604: Possible null reference argument for parameter 'item' in 'bool HashSet<string>.Contains(string item)'. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+  InsiderThreat.Server -> C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\bin\Debug\net8.0\InsiderThreat.Server.dll
+
+Build succeeded.
+
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(98,19): warning CS8618: Non-nullable property 'User' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(99,19): warning CS8618: Non-nullable property 'Content' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(88,19): warning CS8618: Non-nullable property 'Id' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(89,19): warning CS8618: Non-nullable property 'Name' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(90,19): warning CS8618: Non-nullable property 'AccessCode' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Hubs\ChatHub.cs(91,19): warning CS8618: Non-nullable property 'Description' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\Controllers\MessagesController.cs(147,68): warning CS8604: Possible null reference argument for parameter 'item' in 'bool HashSet<string>.Contains(string item)'. [C:\Users\nguye\InsiderThreat-System\src\InsiderThreat.Server\InsiderThreat.Server.csproj]
+    7 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.11
+
+Workload updates are available. Run `dotnet workload list` for more information.

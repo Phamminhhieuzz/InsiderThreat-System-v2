@@ -1,0 +1,72 @@
+.attendance-config-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.config-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.config-row.align-top {
+    align-items: flex-start;
+}
+
+.config-label {
+    font-weight: 500;
+    width: 150px;
+    min-width: 150px;
+}
+
+.config-row.align-top .config-label {
+    margin-top: 5px;
+}
+
+.config-select,
+.config-input {
+    width: 400px;
+    max-width: 100%;
+}
+
+.config-input-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1;
+}
+
+/* Giao diện Mobile/Tablet nhỏ */
+@media screen and (max-width: 768px) {
+    .config-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .config-row.align-top {
+        align-items: stretch;
+    }
+
+    .config-label {
+        width: 100%;
+        min-width: 100%;
+        margin-top: 0 !important;
+    }
+
+    .config-select,
+    .config-input {
+        width: 100% !important;
+    }
+
+    .config-input-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .config-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,163 @@
+.sidebar {
+    padding: 20px 12px 12px;
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    position: sticky;
+    top: var(--header-height);
+    background: var(--color-surface);
+    border-left: 1px solid var(--color-border);
+    display: none;
+    flex-direction: column;
+    gap: 24px;
+}
+
+@media (min-width: 1024px) {
+    .sidebar {
+        display: flex;
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.actions {
+    display: flex;
+    gap: 4px;
+}
+
+.iconBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--color-bg);
+    border: none;
+}
+
+.iconBtn:hover {
+    background-color: var(--color-surface-lighter);
+    color: var(--color-text-main);
+}
+
+.contactList {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* More compact like the image */
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.contact:hover {
+    background-color: #f8fafc;
+    border-color: #e2e8f0;
+    transform: translateX(4px);
+}
+
+.avatarWrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.onlineDot {
+    position: absolute;
+    bottom: 0;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    background-color: #22c55e;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.nameRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.badge {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.badgeStaff {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+.badgeManager {
+    background-color: #f0fdf4;
+    color: #15803d;
+}
+
+.badgeDirector {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+.statusRow {
+    display: flex;
+    align-items: center;
+}
+
+.statusText {
+    font-size: 11px;
+    font-weight: 700;
+    color: #22c55e;
+    letter-spacing: 0.2px;
+}
+
+.department {
+    display: none; /* Replaced by status/tags in this view */
+}

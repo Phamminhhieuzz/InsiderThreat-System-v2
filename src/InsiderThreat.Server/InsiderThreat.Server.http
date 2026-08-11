@@ -1,0 +1,6 @@
+@InsiderThreat.Server_HostAddress = http://localhost:5185
+
+GET {{InsiderThreat.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,298 @@
+/* LoginPage.css - ZDAK Style Refined */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.zdak-login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--color-bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text-main);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.login-controls {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+}
+
+/* Container Box */
+.login-container-wrapper {
+    display: flex;
+    width: 90%;
+    max-width: 1100px;
+    height: 750px;
+    background: var(--color-surface);
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 10px 80px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-border);
+}
+
+/* Left Panel: Illustration */
+.illustration-panel {
+    flex: 1.2;
+    background-color: var(--color-surface-lighter);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 40px;
+}
+
+.illustration-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.monster-svg {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+}
+
+@keyframes monster-drop {
+    0% { transform: translateY(-350px); opacity: 0; }
+    50% { transform: translateY(20px); opacity: 1; }
+    65% { transform: translateY(-15px); }
+    80% { transform: translateY(8px); }
+    90% { transform: translateY(-4px); }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.monster {
+    animation: monster-drop 0.9s cubic-bezier(0.28, 0.84, 0.42, 1) both;
+}
+
+.monster-purple { animation-delay: 0.1s; }
+.monster-black { animation-delay: 0.25s; }
+.monster-yellow { animation-delay: 0.4s; }
+.monster-orange { animation-delay: 0.55s; }
+
+@keyframes monster-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+.shake-anim {
+    animation: monster-shake 0.4s ease-in-out infinite both;
+}
+
+.zdak-watermark {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--color-border);
+    margin: 0;
+    letter-spacing: -2px;
+    opacity: 0.5;
+}
+
+/* Right Panel: Form */
+.form-panel {
+    flex: 1;
+    padding: 80px 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--color-surface);
+}
+
+.zdak-logo {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-text {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-align: center;
+    color: var(--color-text-main);
+}
+
+.subtitle {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.zdak-form .ant-form-item {
+    margin-bottom: 28px;
+}
+
+.input-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+}
+
+/* Redundant label-password removed to match username color */
+
+/* Transparent Underline inputs */
+.zdak-input.ant-input,
+.zdak-input.ant-input-password,
+.zdak-input.ant-input-affix-wrapper {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid var(--color-border) !important;
+    border-radius: 0 !important;
+    padding: 8px 0 !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: var(--color-text-main) !important;
+    box-shadow: none !important;
+}
+
+/* Force transparent backgrounds for autofill */
+.zdak-input input:-webkit-autofill,
+.zdak-input input:-webkit-autofill:hover,
+.zdak-input input:-webkit-autofill:focus,
+.zdak-input input:-webkit-autofill:active,
+.zdak-input:-webkit-autofill,
+.zdak-input:-webkit-autofill:hover,
+.zdak-input:-webkit-autofill:focus,
+.zdak-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 100px var(--color-surface) inset !important;
+    -webkit-text-fill-color: var(--color-text-main) !important;
+}
+
+.zdak-input.ant-input:focus,
+.zdak-input.ant-input-affix-wrapper-focused,
+.zdak-input.ant-input-password:focus {
+    border-bottom-color: var(--color-primary) !important;
+}
+
+/* Remove Ant Design default background on hover/focus */
+.ant-input-affix-wrapper {
+    background-color: transparent !important;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -10px;
+    margin-bottom: 35px;
+}
+
+.zdak-checkbox {
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.forgot-link {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.forgot-link:hover {
+    color: var(--color-primary);
+}
+
+/* Buttons */
+.zdak-btn-primary {
+    background-color: var(--color-text-main) !important;
+    color: var(--color-surface) !important;
+    border: none !important;
+    height: 56px !important;
+    border-radius: 28px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12) !important;
+    transition: transform 0.2s, background 0.2s !important;
+}
+
+.zdak-btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.zdak-btn-google {
+    height: 56px !important;
+    border-radius: 28px !important;
+    border: 1px solid var(--color-border) !important;
+    background-color: var(--color-surface-lighter) !important;
+    color: var(--color-text-main) !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+}
+
+.zdak-btn-secondary {
+    height: 56px !important;
+    border-radius: 28px !important;
+    border: 1px solid var(--color-border) !important;
+    background-color: transparent !important;
+    color: var(--color-text-main) !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    transition: all 0.2s !important;
+}
+
+.zdak-btn-secondary:hover {
+    background-color: var(--color-surface-lighter) !important;
+    border-color: var(--color-primary) !important;
+}
+
+.signup-footer {
+    text-align: center;
+    font-size: 15px;
+    color: var(--color-text-muted);
+    margin-top: 30px;
+}
+
+.signup-link {
+    color: var(--color-text-main);
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-text-main);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .login-container-wrapper {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        border-radius: 0;
+    }
+    .illustration-panel {
+        display: none;
+    }
+    .form-panel {
+        padding: 60px 40px;
+    }
+}

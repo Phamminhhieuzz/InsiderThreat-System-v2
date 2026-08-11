@@ -1,0 +1,101 @@
+.contribution-heatmap {
+    background: #1a1b1e;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #2d2e32;
+    margin-top: 24px;
+    color: #e2e8f0;
+}
+
+.heatmap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.heatmap-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #94a3b8;
+}
+
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.legend-cells {
+    display: flex;
+    gap: 3px;
+}
+
+.heatmap-grid-container {
+    display: flex;
+    gap: 12px;
+}
+
+.heatmap-row-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #64748b;
+    padding: 15px 0 2px 0;
+}
+
+.heatmap-grid {
+    display: flex;
+    gap: 3px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.heatmap-column {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.heatmap-cell {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    transition: transform 0.1s ease;
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.2);
+    z-index: 10;
+    outline: 1.5px solid #fff;
+}
+
+.heatmap-cell-empty {
+    background: transparent !important;
+}
+
+/* GitHub-Style Theme */
+:root {
+    --heatmap-bg-0: #161b22;
+    --heatmap-bg-1: #0e4429;
+    --heatmap-bg-2: #006d32;
+    --heatmap-bg-3: #26a641;
+    --heatmap-bg-4: #39d353;
+}
+
+/* Custom scrollbar for heatmap */
+.heatmap-grid::-webkit-scrollbar {
+    height: 4px;
+}
+
+.heatmap-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.heatmap-grid::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 20px;
+}

@@ -1,0 +1,75 @@
+/* SecureDocumentViewer.css */
+
+.secure-viewer-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-bg);
+}
+
+.secure-viewer-container.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.secure-content {
+    width: 100%;
+    height: 100%;
+    transition: filter 0.3s ease-in-out;
+}
+
+/* Đây là cốt lõi: Làm mờ tài liệu */
+.secure-content.is-blurred {
+    filter: blur(25px) grayscale(100%);
+    pointer-events: none; /* Không cho click, không cho cuộn */
+    user-select: none;
+}
+
+.secure-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.warning-box {
+    background: var(--color-surface);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid #ff4d4f;
+    box-shadow: 0 0 30px rgba(255, 77, 79, 0.3);
+    max-width: 500px;
+}
+
+.warning-icon {
+    font-size: 64px;
+    color: #ff4d4f;
+    animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.camera-indicator {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #52c41a;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}

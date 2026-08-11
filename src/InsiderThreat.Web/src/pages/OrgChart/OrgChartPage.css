@@ -1,0 +1,230 @@
+/* Vertical Indented Tree (Compact & Tidy) */
+.org-chart-wrapper {
+    overflow-y: auto;
+    padding: 20px 40px 100px 40px;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+}
+
+.tree {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tree ul {
+    position: relative;
+    padding-left: 30px;
+    list-style-type: none;
+}
+
+.tree > ul {
+    padding-left: 0;
+}
+
+.tree li {
+    position: relative;
+    padding: 10px 0;
+    list-style-type: none;
+}
+
+/* Vertical Spine (L-shaped connectors) */
+.tree li::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    border-left: 1.5px solid #cbd5e1;
+    width: 1px;
+    height: calc(100% + 20px);
+}
+
+.tree li:last-child::before {
+    height: 48px; /* Stop at the last node's middle */
+}
+
+/* Horizontal Connector to Card */
+.tree li::after {
+    content: "";
+    position: absolute;
+    top: 38px;
+    left: -20px;
+    border-top: 1.5px solid #cbd5e1;
+    width: 20px;
+}
+
+/* Remove connectors for root nodes */
+.tree > ul > li::before, .tree > ul > li::after {
+    display: none;
+}
+
+/* Compact Horizontal Node Card */
+.user-node-card {
+    display: inline-flex !important;
+    align-items: center;
+    min-width: 260px;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0 !important;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.user-node-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+    border-color: #3b82f6 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.user-node-info {
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    width: 100%;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+}
+
+.user-role {
+    font-size: 11px;
+    font-weight: 600;
+    color: #2563eb;
+    margin-top: 2px;
+}
+
+.user-dept {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 1px;
+}
+
+/* Tier-based Side Accents */
+.user-node-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: #cbd5e1;
+}
+
+/* Root/Admin */
+.tree > ul > li > .node-content .user-node-card::before {
+    background: linear-gradient(180deg, #f59e0b, #ef4444);
+}
+
+/* Director */
+.tree > ul > li > ul > li > .node-content .user-node-card::before {
+    background: linear-gradient(180deg, #3b82f6, #06b6d4);
+}
+
+/* Manager */
+.tree > ul > li > ul > li > ul > li > .node-content .user-node-card::before {
+    background: linear-gradient(180deg, #10b981, #34d399);
+}
+
+/* Highlights */
+.highlight-node {
+    border: 2px solid #3b82f6 !important;
+    background: rgba(239, 246, 255, 0.95) !important;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Header Title Banner */
+.org-chart-title-banner {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.org-chart-title-container {
+    background: #2563eb;
+    border-radius: 6px;
+    padding: 10px 30px;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+}
+
+.org-chart-title-text {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+/* Node Toggle (Collapse/Expand) Icon Area */
+.node-toggle-btn {
+    cursor: pointer;
+    font-size: 16px;
+    color: #94a3b8;
+    margin-right: 8px;
+    transition: color 0.2s;
+}
+
+.node-toggle-btn:hover {
+    color: #3b82f6;
+}
+
+/* Adaptability */
+.dark .user-node-card {
+    background: rgba(30, 32, 45, 0.8) !important;
+    color: white;
+}
+.back-btn-circular {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    color: #64748b;
+}
+
+.back-btn-circular:hover {
+    transform: translateX(-5px);
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+.dark .back-btn-circular {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+}
+
+.dark .back-btn-circular:hover {
+    background: #3b82f6;
+    color: white;
+}
+
+

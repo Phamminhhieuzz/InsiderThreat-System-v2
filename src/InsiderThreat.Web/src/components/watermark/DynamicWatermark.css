@@ -1,0 +1,54 @@
+.dynamic-watermark-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Rất quan trọng: cho phép click xuyên qua watermark */
+    user-select: none; /* Không cho bôi đen chữ */
+    z-index: 50; /* Hiển thị đè lên trên tài liệu nhưng dưới các modal khác */
+}
+
+.watermark-grid {
+    position: absolute;
+    /* Làm grid to gấp 2-3 lần container để có không gian xoay và animation */
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    transform: rotate(-30deg);
+    opacity: 0.12; /* Đủ nhạt để đọc tài liệu, đủ đậm để chụp lén thấy rõ */
+    color: #000;
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: monospace;
+    
+    /* Animation xê dịch liên tục để chống tool xóa watermark tính */
+    animation: floatWatermark 30s linear infinite alternate;
+}
+
+body.dark-mode .watermark-grid {
+    color: #fff;
+    opacity: 0.08;
+}
+
+.watermark-item {
+    padding: 3rem 4rem;
+    text-align: center;
+    white-space: pre-line;
+    line-height: 1.5;
+}
+
+@keyframes floatWatermark {
+    0% {
+        transform: rotate(-30deg) translate(0, 0);
+    }
+    100% {
+        transform: rotate(-30deg) translate(-5%, -5%);
+    }
+}

@@ -1,0 +1,129 @@
+.survey-layout-wrapper {
+    min-height: 100vh;
+    background: var(--color-bg);
+}
+
+.survey-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Hero Banner - Liquid Glass */
+.survey-hero-banner {
+    width: 100%;
+    padding: 2px;
+    background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa, #8b5cf6, #ec4899);
+    background-size: 300% 300%;
+    animation: gradientFlow 10s ease infinite;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.25);
+    overflow: hidden;
+    position: relative;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.banner-content {
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 28px;
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.hero-icon {
+    font-size: 48px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+    background: rgba(255, 255, 255, 0.2);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Tabs Styling - Premium */
+.survey-tabs-container {
+    background: var(--color-surface);
+    padding: 10px;
+    border-radius: 24px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+:global(.dark) .survey-tabs-container {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+:global(.premium-tabs .ant-tabs-nav) {
+    margin-bottom: 0 !important;
+}
+
+:global(.premium-tabs .ant-tabs-tab) {
+    padding: 12px 24px !important;
+    border-radius: 14px !important;
+    transition: all 0.3s ease !important;
+    font-weight: 600 !important;
+}
+
+:global(.premium-tabs .ant-tabs-tab-active) {
+    background: var(--color-surface-lighter) !important;
+}
+
+:global(.dark) :global(.premium-tabs .ant-tabs-tab:not(.ant-tabs-tab-active)) {
+    color: var(--color-text-muted) !important;
+}
+
+:global(.premium-tabs .ant-tabs-ink-bar) {
+    height: 4px !important;
+    border-radius: 2px !important;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6) !important;
+}
+
+/* Content Area */
+.survey-content-area {
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Empty State */
+.empty-survey-state {
+    padding: 60px 40px;
+    text-align: center;
+    background: var(--color-surface);
+    border-radius: 24px;
+    border: 1px dashed var(--color-border);
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-survey-state h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: 8px;
+}
+
+.empty-survey-state p {
+    color: var(--color-text-muted);
+}

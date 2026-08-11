@@ -1,0 +1,302 @@
+.timelineTab {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 10px;
+}
+
+/* --- Header Section --- */
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.timeline-title {
+    margin: 8px 0 0 0;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-text-main);
+}
+
+.timeline-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.glass-tag {
+    background: var(--color-primary-light) !important;
+    border: 1px solid var(--color-border) !important;
+    color: var(--color-primary) !important;
+    font-weight: 600;
+}
+
+/* --- Main Gantt Layout --- */
+.timeline-container {
+    background: #f1f5f9; /* Changed to Light Gray for better tone matching */
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+:global(.dark) .timeline-container {
+    background: #0b0e14; /* Stay navy in dark mode */
+    border-color: #1e293b;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-body-wrapper {
+    display: flex;
+}
+
+/* -- Left Panel: Tasks/Phases -- */
+.tl-left-panel {
+    width: 280px;
+    border-right: 1px solid var(--color-border);
+    background: var(--color-surface-lighter);
+    flex-shrink: 0;
+}
+
+:global(.dark) .tl-left-panel {
+    background: #111827;
+    border-right-color: #1e293b;
+}
+
+.tl-col-heading {
+    padding: 12px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tl-phase-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: var(--color-surface-lighter);
+    cursor: pointer;
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.2s;
+}
+
+.tl-phase-header:hover {
+    background: var(--color-surface);
+}
+
+.phase-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-main);
+}
+
+.tl-task-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px 10px 40px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.task-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+/* -- Right Panel: Timeline Tracks -- */
+.tl-gantt-panel {
+    flex: 1;
+    overflow-x: auto;
+}
+
+.tl-time-header {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-lighter);
+}
+
+:global(.dark) .tl-time-header {
+    background: #111827; /* Darker header for dark mode */
+    border-bottom-color: #1e293b;
+}
+
+.tl-time-col {
+    flex-shrink: 0;
+    width: 120px;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    border-right: 1px solid var(--color-border);
+}
+
+.tl-gantt-content {
+    position: relative;
+    min-width: 840px; /* 7 weeks * 120px */
+}
+
+.tl-phase-empty-row {
+    height: 41px; /* Matches .tl-phase-header height */
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tl-bar-row {
+    height: 37px; /* Matches .tl-task-item height */
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+}
+
+.tl-bar-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.tl-task-bar {
+    position: absolute;
+    height: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 10px;
+    border-left: 3px solid transparent;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s;
+    overflow: hidden;
+}
+
+.tl-task-bar:hover {
+    filter: brightness(1.2);
+    transform: translateY(-50%) scaleY(1.1);
+}
+
+.tl-bar-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.tl-bar-label {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Milestones Footer --- */
+.tl-milestones-footer {
+    margin-top: 12px;
+}
+
+.footer-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: 16px;
+}
+
+.milestone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.milestone-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: border-color 0.2s;
+}
+
+.milestone-card.is-done {
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.m-icon {
+    font-size: 24px;
+    color: var(--color-border);
+}
+
+.milestone-card.is-done .m-icon {
+    color: #10b981;
+}
+
+.m-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-main);
+}
+
+.m-date {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+/* -- Milestone Lines Overlay -- */
+.tl-milestone-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 2px dashed #ff4d4f;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.tl-milestone-line .line-label {
+    position: absolute;
+    top: 5px;
+    left: 4px;
+    background: #ff4d4f;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 800;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 6px rgba(255, 77, 79, 0.3);
+}
+
+.empty-milestones {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: var(--color-surface-lighter);
+    border: 2px dashed var(--color-border);
+    border-radius: 12px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    gap: 8px;
+}
+
+.empty-milestones:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+}

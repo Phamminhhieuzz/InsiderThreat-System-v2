@@ -1,0 +1,14 @@
+INSIDER THREAT SYSTEM - END USER LICENSE AGREEMENT (EULA)
+
+VUI LÒNG ĐỌC KỸ CÁC ĐIỀU KHOẢN TRƯỚC KHI CÀI ĐẶT.
+
+1. BẢO MẬT & THEO DÕI
+Bằng việc cài đặt phần mềm này, bạn đồng ý cho phép hệ thống chạy ngầm các Agent (ClientAgent, MonitorAgent, Watchdog) nhằm thu thập, lưu trữ và báo cáo các thông tin liên quan đến hoạt động trên máy tính (sử dụng USB, ứng dụng đang chạy, vị trí, file hệ thống) về máy chủ tập trung (tuyen-thda.io.vn) nhằm mục đích bảo vệ dữ liệu nội bộ.
+
+2. QUYỀN QUẢN TRỊ
+Phần mềm này sẽ ẩn khỏi các công cụ gỡ cài đặt thông thường. Việc gỡ bỏ (Uninstall) chỉ có thể được thực hiện bởi Quản trị viên hệ thống thông qua mật khẩu cấp cao. Bất kỳ hành vi cố tình can thiệp, tắt, hoặc xóa ứng dụng một cách trái phép sẽ được ghi nhận là hành vi mờ ám (Insider Threat) và gửi cảnh báo ngay lập tức.
+
+3. SỬ DỤNG HỢP LÝ
+Phần mềm chỉ được sử dụng trên các thiết bị do công ty/tổ chức cấp phát hoặc đã được phê duyệt. NGƯỜI SỬ DỤNG CHẤP NHẬN TẤT CẢ CÁC ĐIỀU KHOẢN SAU KHI CLICK "I AGREE" (Tôi đồng ý).
+
+Nếu không đồng ý, vui lòng hủy bỏ quá trình cài đặt ngay bây giờ.

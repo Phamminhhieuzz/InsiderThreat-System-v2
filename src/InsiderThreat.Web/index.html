@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Ứng dụng tự quản lý đa ngôn ngữ (VI/EN) bằng i18next. Chặn trình duyệt
+       dịch tự động, vì bản dịch của trình duyệt chèn đè lên chữ gốc khiến
+       giao diện bị lặp chữ và sai hoa/thường. -->
+  <meta name="google" content="notranslate" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%232563eb'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='central' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='900' font-size='24'%3EW%3C/text%3E%3C/svg%3E" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insider Threat</title>
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  
+  <!-- PWA Metadata -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1890ff" />
+  <link rel="apple-touch-icon" href="/favicon.ico" />
+
+</head>
+
+<body class="bg-[#f1f5f9] text-[#0f172a] font-sans antialiased">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('PWA Service Worker registered'))
+          .catch(err => console.log('PWA Service Worker failed', err));
+      });
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+.monitor-logs-container {
+    padding: 24px;
+    padding-bottom: 80px;
+    background: var(--color-bg);
+    min-height: 100vh;
+    color: var(--color-text-main);
+}
+
+.monitor-logs-container.mobile {
+    padding: 12px;
+    padding-bottom: 80px;
+}
+
+.monitor-header {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.monitor-header.mobile {
+    margin-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.monitor-title {
+    margin: 0 !important;
+    color: var(--color-text-main) !important;
+}
+
+/* Stat Cards */
+.stat-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--color-border) !important;
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card.total { background: var(--color-primary-light) !important; }
+.stat-card.critical { background: rgba(255, 77, 79, 0.1) !important; }
+.stat-card.screenshots { background: rgba(8, 151, 156, 0.1) !important; }
+.stat-card.keywords { background: rgba(83, 29, 171, 0.1) !important; }
+
+.stat-value.total { color: var(--color-primary) !important; font-weight: bold; }
+.stat-value.critical { color: #ff4d4f !important; font-weight: bold; }
+.stat-value.screenshots { color: #08979c !important; }
+.stat-value.keywords { color: #531dab !important; }
+
+/* Charts */
+.chart-card {
+    border-radius: 12px !important;
+    background: var(--color-surface) !important;
+    border: 1px solid var(--color-border) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+
+.chart-card .ant-card-head {
+    border-bottom: 1px solid var(--color-border) !important;
+    background: transparent !important;
+}
+
+.chart-card .ant-card-head-title {
+    color: var(--color-text-main) !important;
+}
+
+/* Machine Cards */
+.machine-card {
+    border-radius: 12px !important;
+    background: var(--color-surface) !important;
+    border: 1px solid var(--color-border) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+    transition: all 0.2s;
+}
+
+.machine-card:hover {
+    border-color: var(--color-primary) !important;
+    transform: translateY(-2px);
+}
+
+.machine-card.selected {
+    border-color: var(--color-primary) !important;
+    background: var(--color-primary-light) !important;
+}
+
+/* Table overrides */
+.dark .ant-table {
+    background: transparent !important;
+    color: var(--color-text-main) !important;
+}
+
+.dark .ant-table-thead > tr > th {
+    background: var(--color-surface-lighter) !important;
+    color: var(--color-text-main) !important;
+    border-bottom: 1px solid var(--color-border) !important;
+}
+
+.dark .ant-table-tbody > tr > td {
+    border-bottom: 1px solid var(--color-border) !important;
+}
+
+.dark .ant-table-tbody > tr:hover > td {
+    background: var(--color-surface-lighter) !important;
+}
+
+/* Recharts overrides in JS via props, but basic container here */
+.chart-container {
+    width: 100%;
+    background: transparent;
+}

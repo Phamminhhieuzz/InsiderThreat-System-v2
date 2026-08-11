@@ -1,0 +1,300 @@
+/* Create Task Modal Overlay */
+.taskModal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.taskModal-content {
+    background: var(--color-surface);
+    width: 600px;
+    max-width: 95vw;
+    border-radius: 16px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+/* Header */
+.taskModal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.taskModal-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+/* Body */
+.taskModal-body {
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.taskForm-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.taskForm-row label {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    padding-top: 8px;
+}
+
+.taskForm-row label .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.taskForm-value {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 36px;
+}
+
+/* Inputs & Elements */
+.statusSelect {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-background);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+.statusSelect select {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-text-main);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+input[type="date"] {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--color-text-main);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Assignees Tags */
+.assignees {
+    flex-wrap: wrap;
+}
+
+.assigneeTag {
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.assigneeTag.bg-blue { background: #eff6ff; color: #3b82f6; }
+.assigneeTag.bg-green { background: #f0fdf4; color: #10b981; }
+.assigneeTag.bg-yellow { background: #fefce8; color: #eab308; }
+
+.addAssigneeBtn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px dashed var(--color-text-muted);
+    background: none;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.tagsDropdown {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--color-text-main);
+    outline: none;
+    min-width: 150px;
+}
+
+.priorityTag.urgent {
+    background: #fef2f2;
+    color: #ef4444;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Description */
+.descriptionRow {
+    flex-direction: row;
+}
+
+.descriptionRow .taskForm-value {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 80px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 12px;
+    color: var(--color-text-main);
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+    outline: none;
+}
+
+.addSectionBtn {
+    background: none;
+    border: none;
+    color: var(--color-text-main);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Comment Section */
+.taskModal-comment {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+}
+
+.taskModal-comment img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.taskModal-comment input {
+    flex: 1;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--color-text-main);
+    outline: none;
+}
+
+/* Footer */
+.taskModal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-surface);
+}
+
+.footer-collaborators {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-collaborators span {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.collabPile {
+    display: flex;
+    align-items: center;
+}
+
+.collabPile img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--color-surface);
+    margin-left: -8px;
+}
+.collabPile img:first-child { margin-left: 0; }
+
+.addCollabBtn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px dashed var(--color-text-muted);
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 4px;
+    color: var(--color-text-muted);
+}
+
+.footer-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btnCancel {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: var(--color-text-main);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btnSave {
+    background: var(--color-text-main);
+    color: var(--color-background);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}

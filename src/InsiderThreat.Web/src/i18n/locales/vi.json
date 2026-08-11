@@ -1,0 +1,710 @@
+{
+    "landing": {
+        "hero": {
+            "title": "Bảo Vệ Doanh Nghiệp Khỏi Các Mối Đe Dọa Nội Bộ",
+            "subtitle": "Nền tảng cấp doanh nghiệp để phát hiện, giám sát và ngăn chặn rủi ro bảo mật từ nhân viên và đối tác",
+            "cta_primary": "Dùng Thử Miễn Phí",
+            "cta_secondary": "Đặt Lịch Demo"
+        },
+        "problem": {
+            "title": "Thách Thức Từ Mối Đe Dọa Nội Bộ",
+            "description": "60% các vụ vi phạm dữ liệu xuất phát từ nguồn nội bộ. Các biện pháp bảo mật truyền thống tập trung vào mối đe dọa bên ngoài, khiến doanh nghiệp dễ bị tổn thương trước rủi ro lớn nhất: những người được tin tưởng từ bên trong.",
+            "stats": [
+                {
+                    "value": "60%",
+                    "label": "Vi phạm từ nội bộ"
+                },
+                {
+                    "value": "$15M",
+                    "label": "Chi phí trung bình/sự cố"
+                },
+                {
+                    "value": "85 ngày",
+                    "label": "Thời gian phát hiện TB"
+                }
+            ]
+        },
+        "features": {
+            "title": "Bộ Giải Pháp Bảo Vệ Toàn Diện",
+            "subtitle": "Công cụ giám sát và cộng tác tiên tiến được thiết kế cho đội ngũ hiện đại",
+            "items": [
+                {
+                    "title": "Giám Sát USB & Thiết Bị",
+                    "description": "Theo dõi thời gian thực tất cả thiết bị kết nối với phát hiện và chặn mối đe dọa tự động"
+                },
+                {
+                    "title": "Nhận Diện Khuôn Mặt",
+                    "description": "Xác thực sinh trắc học đảm bảo chỉ nhân viên được ủy quyền truy cập hệ thống nhạy cảm"
+                },
+                {
+                    "title": "Theo Dõi Tài Liệu",
+                    "description": "Giám sát truy cập, chỉnh sửa và chia sẻ tài liệu với nhật ký kiểm toán đầy đủ"
+                },
+                {
+                    "title": "Nhắn Tin Bảo Mật",
+                    "description": "Kênh giao tiếp mã hóa đầu-cuối cho các cuộc thảo luận nội bộ bí mật"
+                },
+                {
+                    "title": "Hội Nghị Video",
+                    "description": "Cuộc họp video bảo mật với tính năng chia sẻ màn hình và ghi hình"
+                },
+                {
+                    "title": "Mạng Xã Hội Nội Bộ",
+                    "description": "Nền tảng tin tức và cộng tác nội bộ với hỗ trợ đa phương tiện và tương tác phong phú"
+                }
+            ]
+        },
+        "howItWorks": {
+            "title": "Cách Hoạt Động",
+            "steps": [
+                {
+                    "title": "Triển Khai",
+                    "description": "Cài đặt nhanh 15 phút không thay đổi hạ tầng"
+                },
+                {
+                    "title": "Giám Sát",
+                    "description": "Phân tích AI phát hiện hành vi bất thường"
+                },
+                {
+                    "title": "Cảnh Báo",
+                    "description": "Thông báo thời gian thực về hoạt động đáng ngờ"
+                },
+                {
+                    "title": "Phản Ứng",
+                    "description": "Quy trình phản hồi tự động và thủ công"
+                }
+            ]
+        },
+        "benefits": {
+            "title": "Tại Sao Chọn InsiderThreat?",
+            "items": [
+                {
+                    "title": "99.9% Phát Hiện Mối Đe Dọa",
+                    "description": "Độ chính xác hàng đầu ngành nhờ học máy tiên tiến"
+                },
+                {
+                    "title": "Phản Ứng Nhanh Hơn 70%",
+                    "description": "Quy trình tự động giảm thời gian phản hồi sự cố đáng kể"
+                },
+                {
+                    "title": "Sẵn Sàng Tuân Thủ",
+                    "description": "Đáp ứng GDPR, SOC 2, ISO 27001 ngay lập tức"
+                },
+                {
+                    "title": "Kiến Trúc Zero Trust",
+                    "description": "Xác minh liên tục, không tin tưởng ngầm định"
+                },
+                {
+                    "title": "Tích Hợp Liền Mạch",
+                    "description": "Hoạt động với công cụ và hạ tầng hiện có"
+                },
+                {
+                    "title": "Hỗ Trợ 24/7",
+                    "description": "Đội ngũ bảo mật chuyên môn luôn sẵn sàng"
+                }
+            ]
+        },
+        "testimonials": {
+            "title": "Được Tin Dùng Bởi Các Tổ Chức Hàng Đầu",
+            "items": [
+                {
+                    "name": "Sarah Chen",
+                    "role": "CISO, TechCorp Global",
+                    "quote": "InsiderThreat giảm 85% sự cố bảo mật của chúng tôi trong quý đầu tiên. ROI đo lường được ngay lập tức."
+                },
+                {
+                    "name": "Michael Rodriguez",
+                    "role": "VP Bảo Mật, FinanceHub",
+                    "quote": "Cuối cùng cũng có giải pháp giải quyết yếu tố con người trong bảo mật. Tính năng nhắn tin mã hóa thật tuyệt vời."
+                },
+                {
+                    "name": "TS. Anh Nguyễn",
+                    "role": "CTO, DataSecure Vietnam",
+                    "quote": "Toàn diện, mạnh mẽ và đặc biệt dễ sử dụng. Đội ngũ của chúng tôi làm quen chỉ trong vài ngày."
+                }
+            ]
+        },
+        "pricing": {
+            "title": "Chọn Gói Dịch Vụ",
+            "subtitle": "Giá linh hoạt cho mọi quy mô tổ chức",
+            "plans": [
+                {
+                    "name": "Khởi Đầu",
+                    "price": "Miễn Phí",
+                    "description": "Hoàn hảo cho đội nhỏ",
+                    "features": [
+                        "Tối đa 10 người dùng",
+                        "Giám sát cơ bản",
+                        "Lưu trữ 7 ngày",
+                        "Hỗ trợ email",
+                        "Nhắn tin bảo mật"
+                    ]
+                },
+                {
+                    "name": "Chuyên Nghiệp",
+                    "price": "$49",
+                    "period": "người dùng/tháng",
+                    "description": "Cho doanh nghiệp đang phát triển",
+                    "features": [
+                        "Tối đa 100 người dùng",
+                        "Phân tích nâng cao",
+                        "Lưu trữ 30 ngày",
+                        "Hỗ trợ ưu tiên",
+                        "Hội nghị video",
+                        "Mạng xã hội nội bộ",
+                        "Truy cập API"
+                    ],
+                    "popular": true
+                },
+                {
+                    "name": "Doanh Nghiệp",
+                    "price": "Tùy Chỉnh",
+                    "description": "Cho tổ chức lớn",
+                    "features": [
+                        "Không giới hạn người dùng",
+                        "Tích hợp tùy chỉnh",
+                        "Lưu trữ không giới hạn",
+                        "Hỗ trợ chuyên biệt",
+                        "Đảm bảo SLA",
+                        "Triển khai tại chỗ",
+                        "Tùy chọn white-label"
+                    ]
+                }
+            ]
+        },
+        "cta": {
+            "title": "Sẵn Sàng Bảo Vệ Tổ Chức Của Bạn?",
+            "subtitle": "Tham gia cùng hàng nghìn công ty đang bảo vệ tài sản với InsiderThreat",
+            "button": "Bắt Đầu Ngay"
+        },
+        "footer": {
+            "company": "InsiderThreat Security Solutions",
+            "tagline": "Bảo vệ doanh nghiệp khỏi mối đe dọa nội bộ",
+            "links": {
+                "product": "Sản Phẩm",
+                "solutions": "Giải Pháp",
+                "pricing": "Bảng Giá",
+                "docs": "Tài Liệu",
+                "about": "Về Chúng Tôi",
+                "blog": "Blog",
+                "careers": "Tuyển Dụng",
+                "contact": "Liên Hệ"
+            },
+            "legal": {
+                "privacy": "Chính Sách Bảo Mật",
+                "terms": "Điều Khoản Dịch Vụ",
+                "security": "Bảo Mật"
+            },
+            "social": {
+                "linkedin": "LinkedIn",
+                "twitter": "Twitter",
+                "github": "GitHub"
+            },
+            "copyright": "© 2026 InsiderThreat. Bản quyền đã được bảo hộ."
+        }
+    },
+    "common": {
+        "learnMore": "Tìm Hiểu Thêm",
+        "getStarted": "Bắt Đầu",
+        "contactUs": "Liên Hệ",
+        "language": "Ngôn Ngữ"
+    },
+    "nav": {
+        "theme_dark": "Giao diện: Tối",
+        "theme_light": "Giao diện: Sáng",
+        "language": "Ngôn ngữ",
+        "logout": "Đăng xuất",
+        "logout_confirm": "Bạn có chắc chắn muốn đăng xuất không?",
+        "notifications": "Thông báo",
+        "no_notifications": "Không có thông báo mới",
+        "profile": "Hồ sơ cá nhân",
+        "admin_dashboard": "Bảng quản trị Admin",
+        "feed": "Bảng tin",
+        "staff": "Nhân sự",
+        "library": "Kho tài liệu",
+        "groups": "Nhóm",
+        "meet": "Họp trực tuyến",
+        "attendance": "Chấm công",
+        "attendance_warning": "Bạn phải kết nối vào mạng WiFi (IP) được chỉ định để chấm công",
+        "attendance_error": "Lỗi khi kiểm tra kết nối mạng"
+    },
+    "auth": {
+        "welcome": "Chào mừng {{name}}!",
+        "login_failed_desc": "Đăng nhập thất bại! Kiểm tra lại tên đăng nhập và mật khẩu.",
+        "login_failed": "Đăng nhập thất bại",
+        "require_username": "Vui lòng nhập tên đăng nhập!",
+        "username": "Tên đăng nhập",
+        "require_password": "Vui lòng nhập mật khẩu!",
+        "password": "Mật khẩu",
+        "login": "Đăng nhập",
+        "face_login": "Đăng nhập bằng Face ID",
+        "forgot_password": "Quên mật khẩu?",
+        "face_load_failed": "Lỗi khi tải mô hình Face API",
+        "camera_error": "Không thể truy cập camera",
+        "no_face_detected": "⚠️ Không phát hiện khuôn mặt! Vui lòng đặt mặt vào giữa khung hình.",
+        "no_face_detected_short": "Không phát hiện khuôn mặt!",
+        "login_success": "Đăng nhập thành công!",
+        "face_not_recognized": "❌ Khuôn mặt không khớp! Bạn chưa đăng ký Face ID hoặc khuôn mặt không được nhận diện.",
+        "face_not_recognized_short": "Không nhận diện được khuôn mặt",
+        "face_login_failed_desc": "Đăng nhập thất bại! Khuôn mặt không hợp lệ hoặc chưa được đăng ký.",
+        "face_id_title": "🙂 Đăng nhập bằng Face ID",
+        "scan_login": "Quét & Đăng nhập",
+        "back_to_login": "Quay lại Đăng nhập Mật khẩu",
+        "welcome_back": "Chào mừng trở lại!",
+        "please_enter_details": "Vui lòng nhập thông tin của bạn",
+        "remember_me": "Ghi nhớ trong 30 ngày",
+        "login_with_google": "Đăng nhập với Google",
+        "dont_have_account": "Chưa có tài khoản?",
+        "signup": "Đăng ký ngay",
+        "require_email": "Vui lòng nhập email",
+        "otp_sent": "OTP đã được gửi đến email của bạn!",
+        "send_otp_failed": "Gửi OTP thất bại",
+        "require_otp": "Vui lòng nhập mã OTP",
+        "otp_valid": "OTP hợp lệ!",
+        "otp_invalid": "OTP không hợp lệ",
+        "require_all_info": "Vui lòng nhập đầy đủ thông tin",
+        "password_mismatch": "Mật khẩu xác nhận không khớp",
+        "password_length": "Mật khẩu phải có ít nhất 6 ký tự",
+        "reset_success": "Reset mật khẩu thành công! Đang chuyển đến trang đăng nhập...",
+        "reset_failed": "Reset mật khẩu thất bại",
+        "forgot_password_title": "🔒 Quên Mật Khẩu",
+        "enter_email": "Nhập Email",
+        "verify_otp": "Xác thực OTP",
+        "set_new_password": "Đặt mật khẩu mới",
+        "email_instruction_title": "Nhập email đã đăng ký",
+        "email_instruction_desc": "Chúng tôi sẽ gửi mã OTP đến email của bạn",
+        "your_email": "Email của bạn",
+        "send_otp": "Gửi mã OTP",
+        "check_email": "Kiểm tra email của bạn",
+        "otp_sent_to": "Mã OTP đã được gửi đến {{email}}. Mã có hiệu lực trong 5 phút.",
+        "enter_otp": "Nhập mã OTP (6 chữ số)",
+        "resend_otp": "Gửi lại mã OTP",
+        "create_new_password": "Tạo mật khẩu mới",
+        "new_password": "Mật khẩu mới",
+        "confirm_password": "Xác nhận mật khẩu",
+        "reset_password": "Đặt lại mật khẩu"
+    },
+    "dashboard": {
+        "logged_out": "Đã đăng xuất!",
+        "menu_feed": "Bảng tin",
+        "menu_usb": "Quản lý USB",
+        "menu_documents": "Nhật ký Tài liệu",
+        "menu_attendance": "Chấm công",
+        "menu_users": "Quản lý Người dùng",
+        "menu_posts": "Quản lý Bài viết",
+        "menu_reports": "Báo cáo vi phạm",
+        "user_profile": "Thông tin",
+        "user_logout": "Đăng xuất",
+        "tab_blocked": "🚫 Thiết bị bị chặn",
+        "tab_whitelist": "✅ Thiết bị cho phép",
+        "tab_alerts": "⚠️ Cảnh báo an ninh",
+        "tab_logs": "📝 Nhật ký gần đây",
+        "usb_title": "🔐 Quản lý Thiết bị USB",
+        "usb_sec": "Bảo mật USB",
+        "admin_label": "Quản trị viên InsiderThreat",
+        "nav_feed": "Bảng tin",
+        "nav_users": "Nhân sự",
+        "nav_posts": "Bài viết",
+        "nav_reports": "Vi phạm",
+        "nav_usb": "USB",
+        "nav_documents": "Tài liệu",
+        "nav_attendance": "Chấm công",
+        "attendance_warning": "Bạn phải kết nối vào mạng WiFi (IP) được chỉ định để chấm công",
+        "attendance_error": "Lỗi khi kiểm tra kết nối mạng",
+        "check_in_btn": "Điểm danh chấm công"
+    },
+    "feed": {
+        "max_chat_windows": "Tối đa 3 cửa sổ chat được mở",
+
+        "post_placeholder": "{{name}} ơi, bạn đang nghĩ gì?",
+        "create_post_title": "TẠO BÀI VIẾT",
+        "public_badge": "🌐 CÔNG KHAI",
+        "caption_placeholder": "Thêm chú thích...",
+        "add_to_post": "Thêm vào bài viết",
+        "add_media": "Ảnh/Video",
+        "add_media_title": "Ảnh hoặc Video",
+        "scope_public": "🌐 Toàn công ty",
+        "scope_managers": "👔 Chỉ quản lý",
+        "posting": "Đang đăng bài...",
+        "post_now": "ĐĂNG BÀI NGAY",
+        "filter": "Bộ lọc:",
+        "all_categories": "Tất cả danh mục",
+        "period_all": "Tất cả",
+        "period_today": "Hôm nay",
+        "period_week": "Tuần này",
+        "period_month": "Tháng này",
+        "viewing_single": "Đang xem chi tiết bài đăng từ thông báo",
+        "view_all": "Xem tất cả bài viết",
+        "reported_post": "📌 Bài viết được báo cáo",
+        "sensitive_detected": "Phát hiện nội dung nhạy cảm",
+        "sensitive_continue": "Bạn có chắc chắn muốn đăng bài viết này?",
+        "btn_cancel": "Hủy bỏ",
+        "btn_post_anyway": "Vẫn đăng",
+        "post_fail_title": "Không thể tạo bài viết",
+        "post_fail_try_again": "Vui lòng thử lại.",
+        "post_fail_msg": "Đăng bài thất bại: {{msg}}"
+    },
+    "chat_sidebar": {
+        "suggestions_tooltip": "Gợi ý liên hệ",
+        "suggestions_title": "GỢI Ý LIÊN HỆ",
+        "collapse": "Thu gọn",
+        "online": "Đang online",
+        "offline": "Ngoại tuyến",
+        "add_friend": "Kết bạn",
+        "trending": "Xu hướng",
+        "posts_count": "bài viết",
+        "top_fans": "Top Fans",
+        "hot_events": "Hot Events"
+    },
+    "chat": {
+        "start_chat": "Bắt đầu trò chuyện",
+        "no_key_e2ee": "Người nhận chưa thiết lập khóa mã hóa. Không thể gửi tin nhắn E2EE.",
+        "send_fail": "Gửi tin nhắn thất bại",
+        "send_file_fail": "Tải lên / Gửi tệp thất bại",
+        "title_chats": "Chats",
+        "search_placeholder": "Tìm kiếm Messenger",
+        "logout": "Đăng xuất",
+        "nav_chats": "Tin nhắn",
+        "nav_contacts": "Liên hệ",
+        "nav_profile": "Hồ sơ",
+        "status_active": "Đang hoạt động",
+        "status_offline": "Ngoại tuyến",
+        "info_title": "Thông tin thiết lập",
+        "tab_media": "Đa phương tiện",
+        "tab_files": "Tệp tin",
+        "tab_text": "Văn bản",
+        "no_media": "Không có ảnh / video",
+        "unknown_file": "Tệp không xác định",
+        "download_file": "Tải xuống tệp",
+        "no_files": "Không có tệp tải lên",
+        "no_text": "Không có tin nhắn văn bản",
+        "e2ee_notice": "Tin nhắn được mã hóa đầu cuối. Không ai bên ngoài cuộc trò chuyện này, kể cả SocialNet, có thể đọc hoặc nghe được.",
+        "btn_save": "Lưu",
+        "btn_cancel": "Hủy",
+        "edited_label": "(đã chỉnh sửa)",
+        "read_receipt": "Đã xem",
+        "delete_everyone": "Xóa với mọi người",
+        "edit_message": "Chỉnh sửa tin nhắn",
+        "delete_me": "Xóa ở phía tôi",
+        "type_message": "Nhập tin nhắn đã mã hóa...",
+        "e2ee_title": "Trò chuyện mã hóa đầu cuối (E2EE)",
+        "e2ee_desc": "Tin nhắn được mã hóa ngay trên thiết bị của bạn. Chỉ người nhận mới có thể đọc chúng."
+    },
+    "library": {
+        "load_doc_fail": "Không thể tải tài liệu",
+        "preview_error": "Lỗi khi hiển thị tài liệu",
+        "loading": "Đang tải...",
+        "error_prefix": "Lỗi:",
+        "role_employee": "Nhân viên",
+        "load_list_fail": "Không thể tải danh sách tài liệu",
+        "delete_success": "Đã xóa tài liệu",
+        "delete_fail": "Không thể xóa tài liệu",
+        "update_success": "Đã cập nhật quyền truy cập",
+        "update_fail": "Không thể cập nhật quyền truy cập",
+        "role_director": "Giám đốc",
+        "role_manager": "Quản lý",
+        "role_manager_up": "Quản lý trở lên",
+        "role_all_employees": "Tất cả nhân viên",
+        "upload_success": "{{name}} đã được tải lên thành công.",
+        "unknown_error": "Lỗi không xác định",
+        "upload_fail": "{{name}} tải lên thất bại: {{error}}",
+        "title": "Kho tài liệu",
+        "subtitle": "Quản lý và chia sẻ tài liệu nội bộ",
+        "add_btn": "Thêm tài liệu",
+        "search_placeholder": "Tìm kiếm tài liệu hoặc người đăng...",
+        "loading_docs": "Đang tải tài liệu...",
+        "no_docs": "Không thấy tài liệu nào",
+        "delete_title": "Xóa tài liệu",
+        "delete_confirm": "Bạn có muốn xóa vĩnh viễn tệp này?",
+        "btn_delete": "Xóa",
+        "btn_cancel": "Hủy",
+        "tooltip_preview": "Xem trực tiếp",
+        "upload_title": "Tải tài liệu lên",
+        "field_name": "Tên tài liệu",
+        "name_placeholder": "Nhập tên tài liệu...",
+        "field_min_role": "Cấp bậc tối thiểu",
+        "field_viewers": "Người được xem (Tùy chọn)",
+        "viewers_placeholder": "Chọn người được phép xem...",
+        "field_upload": "Tải tệp lên",
+        "dragger_title": "Kéo và thả hoặc Chọn tệp",
+        "dragger_hint": "Hỗ trợ Word, Excel, PDF (Tối đa 25MB)",
+        "btn_upload": "Tải lên",
+        "edit_title": "Sửa quyền xem",
+        "btn_save": "Lưu thay đổi"
+    },
+    "docs": {
+        "title": "Nhật ký Truy cập Tài liệu",
+        "btn_refresh": "Làm mới",
+        "col_doc": "Tài liệu / File",
+        "col_account": "Tài khoản / Máy tính",
+        "col_action": "Hành động",
+        "col_time": "Thời gian",
+        "empty_text": "Chưa có nhật ký truy cập tài liệu nào"
+    },
+    "groups": {
+        "group1_name": "Phòng Phát Triển Sản Phẩm",
+        "group1_desc": "Nơi thảo luận về chiến lược sản phẩm và đổi mới sáng tạo.",
+        "cat_department": "Phòng ban",
+        "group2_name": "Hội Những Người Thích Cà Phê",
+        "group2_desc": "Chia sẻ các loại cà phê ngon, địa điểm thú vị và mẹo pha chế.",
+        "cat_hobby": "Sở thích",
+        "group3_name": "Kỹ thuật & Công nghệ",
+        "group3_desc": "Chia sẻ kiến thức kỹ thuật, debug tips và best practices.",
+        "cat_expertise": "Chuyên môn",
+        "group4_name": "HR & Văn hóa doanh nghiệp",
+        "group4_desc": "Cập nhật chính sách, hoạt động nội bộ và văn hóa công ty.",
+        "title": "Cộng đồng",
+        "subtitle": "Khám phá và kết nối với các đồng nghiệp cùng sở thích.",
+        "btn_create_group": "TẠO NHÓM MỚI",
+        "section_your_groups": "Nhóm của bạn",
+        "members_count": "THÀNH VIÊN",
+        "btn_access": "TRUY CẬP",
+        "modal_title": "Tạo nhóm mới",
+        "lbl_group_name": "Tên nhóm",
+        "placeholder_name": "Nhập tên nhóm...",
+        "lbl_description": "Mô tả",
+        "placeholder_desc": "Mô tả ngắn về nhóm...",
+        "lbl_privacy": "Quyền riêng tư",
+        "privacy_public": "Công khai",
+        "privacy_private": "Riêng tư",
+        "btn_cancel": "Hủy",
+        "btn_confirm_create": "Tạo nhóm",
+        "btn_delete": "Xóa dự án",
+        "confirm_delete_title": "Xóa dự án",
+        "confirm_delete_msg": "Bạn có chắc chắn muốn xóa dự án '{{name}}' không? Hành động này không thể hoàn tác."
+    },
+    "staff": {
+        "dept_tech": "Kỹ thuật",
+        "dept_accounting": "Kế toán",
+        "dept_hr": "Nhân sự",
+        "title": "Nhân sự",
+        "search_placeholder": "Tìm kiếm đồng nghiệp...",
+        "section_suggestions": "GỢI Ý LIÊN HỆ",
+        "status_online": "ĐANG ONLINE",
+        "section_departments": "PHÒNG BAN",
+        "employee_count": "nhân viên"
+    },
+    "profile": {
+        "update_avatar_success": "Cập nhật ảnh đại diện thành công",
+        "update_avatar_fail": "Không thể tải lên ảnh đại diện",
+        "loading": "Đang tải...",
+        "btn_edit": "Chỉnh sửa hồ sơ",
+        "tab_activity": "Hoạt động",
+        "tab_security": "Bảo mật",
+        "tab_about": "Giới thiệu",
+        "section_professional_info": "Thông tin nghề nghiệp",
+        "lbl_role": "Vai trò",
+        "lbl_department": "Phòng ban",
+        "lbl_email": "Email",
+        "lbl_phone": "Số điện thoại",
+        "section_security_settings": "Cài đặt bảo mật",
+        "item_face_id": "Nhận diện khuôn mặt",
+        "status_verified": "Đã xác thực",
+        "item_f2k_keys": "Khóa F2K",
+        "status_not_setup": "Chưa thiết lập",
+        "section_recent_activity": "Hoạt động gần đây",
+        "no_posts": "Chưa có bài đăng nào."
+    },
+    "usb_monitor": {
+        "title": "Giám sát USB",
+        "coming_soon": "Sắp ra mắt..."
+    },
+    "attendance": {
+        "save_config_success": "Đã lưu cấu hình mạng thành công!",
+        "save_config_fail": "Không thể lưu cấu hình mạng",
+        "fetch_history_fail": "Không thể lấy lịch sử chấm công",
+        "col_user": "Nhân viên",
+        "col_check_in_time": "Thời gian chấm công",
+        "col_method": "Phương thức",
+        "title": "📅 Lịch sử Chấm công",
+        "config_title": "Cấu hình Mạng WiFi (IP) Chấm công",
+        "config_alert_title": "Bảo mật mạng WiFi",
+        "config_alert_desc": "Chọn một mạng từ danh sách các mạng đang hoạt động của cả Máy chủ và Thiết bị hiện tại để tự động trích xuất dải mạng hợp lệ (rất hữu ích cho mạng cục bộ LAN/WiFi). Các thiết bị chung mạng này sẽ có thể chấm công. Hoặc bạn có thể nhập thủ công IP chính xác bên dưới.",
+        "lbl_active_network": "Mạng đang hoạt động:",
+        "placeholder_network": "Chọn mạng để tự động điền dải IP",
+        "lbl_allowed_ips": "Dải IP cho phép:",
+        "placeholder_ips": "Ví dụ: 192.168.1., 10.0.0.5, ::1",
+        "btn_save": "Lưu cấu hình"
+    },
+    "meet": {
+        "create_success": "Đã tạo phòng: ",
+        "create_fail": "Không thể tạo phòng",
+        "input_code_warning": "Vui lòng nhập mã phòng",
+        "join_success": "Đã tham gia phòng",
+        "join_fail": "Không thể tham gia phòng",
+        "leave_room": "Đã rời phòng",
+        "copy_code_success": "Đã sao chép mã phòng",
+        "lobby_title": "Phòng Họp Trực Tuyến",
+        "lobby_subtitle": "Kết nối với đồng nghiệp của bạn",
+        "lobby_desc": "Tạo phòng mới và chia sẻ mã cho người khác, hoặc nhập mã phòng để tham gia.",
+        "placeholder_code": "Nhập mã phòng (VD: ABC123)",
+        "btn_create": "Tạo phòng mới",
+        "btn_join": "Tham gia",
+        "lbl_room_code": "Mã phòng:",
+        "tooltip_copy": "Sao chép mã phòng",
+        "participants_count": "{{count}} người tham gia",
+        "lbl_you": "Bạn",
+        "tooltip_mute": "Tắt mic",
+        "tooltip_unmute": "Bật mic",
+        "tooltip_video_off": "Tắt camera",
+        "tooltip_video_on": "Bật camera",
+        "tooltip_stop_share": "Dừng chia sẻ",
+        "tooltip_share_screen": "Chia sẻ màn hình",
+        "tooltip_leave": "Rời phòng"
+    },
+    "project_detail": {
+        "tabs": {
+            "dashboard": "Tổng quan",
+            "mytasks": "Công việc của tôi",
+            "timeline": "Lộ trình",
+            "files": "Tài liệu"
+        },
+        "breadcrumbs": {
+            "workspace": "Không gian làm việc",
+            "projects": "Dự án"
+        },
+        "header": {
+            "subtitle": "Quản lý và theo dõi tiến độ dự án",
+            "sprint": "Giai đoạn: Digital Rebrand",
+            "btn_delete": "Xóa dự án"
+        },
+        "stats": {
+            "health": "Điểm sức khỏe",
+            "total": "Tổng số Task",
+            "progress": "Đang thực hiện",
+            "completed": "Đã hoàn thành",
+            "sub_health": "Sức khỏe dự án",
+            "sub_total": "Task đã tạo",
+            "sub_progress": "Đang hoạt động",
+            "sub_completed": "Task xong"
+        },
+        "dashboard": {
+            "overview": "Tổng quan",
+            "overview_subtitle": "Theo dõi tiến độ dự án của bạn tại đây.",
+            "total_projects": "Tổng số dự án",
+            "active_tasks": "Công việc đang mở",
+            "assigned_to_me": "Giao cho tôi",
+            "completed": "Đã xong",
+            "roadmap": "Lộ trình",
+            "recent_activity": "Hoạt động công việc gần đây",
+            "today_tasks": "Các dự án hôm nay",
+            "see_all": "Xem tất cả",
+            "create_task": "Tạo công việc",
+            "new_task_modal": "Tạo công việc mới",
+            "task_title": "Tiêu đề công việc",
+            "description": "Mô tả",
+            "assign_to": "Giao cho",
+            "priority": "Độ ưu tiên",
+            "start_date": "Ngày bắt đầu",
+            "due_date": "Hạn chót",
+            "btn_cancel": "Hủy"
+        },
+        "task_drawer": {
+            "assignee": "Người thực hiện",
+            "tags": "Nhãn",
+            "status": "Trạng thái",
+            "due_date": "Hạn chót",
+            "priority": "Ưu tiên",
+            "description_tab": "Mô tả",
+            "comment_tab": "Bình luận",
+            "setting_tab": "Cài đặt",
+            "comment_placeholder": "Thêm bình luận... (Gõ @ để nhắc tên)",
+            "collaborators": "Người tham gia",
+            "cancel": "Hủy",
+            "save": "Lưu",
+            "status_todo": "Cần làm",
+            "status_in_progress": "Đang làm",
+            "status_review": "Xem xét",
+            "status_waiting": "Chờ duyệt",
+            "status_done": "Hoàn thành",
+            "action_reply": "Trả lời",
+            "action_like": "Thích",
+            "action_delete": "Xóa"
+        },
+        "timeline": {
+            "title": "Lộ trình & Lập kế hoạch dự án",
+            "subtitle": "Kế hoạch chiến lược cho dự án",
+            "daily": "Ngày",
+            "weekly": "Tuần",
+            "monthly": "Tháng",
+            "load_fail": "Lỗi khi tải lộ trình",
+            "update_success": "Cập nhật lộ trình thành công",
+            "update_fail": "Cập nhật thất bại",
+            "exporting": "Đang xuất...",
+            "export_success": "Đã xuất lộ trình ra PDF",
+            "btn_export": "Xuất bản",
+            "btn_schedule": "Lập lịch",
+            "col_tasks": "QUY TRÌNH DỰ ÁN",
+            "milestones_title": "Cột mốc dự án",
+            "milestone_kickoff": "Khởi động dự án",
+            "milestone_design": "Thiết kế hệ thống",
+            "milestone_beta": "Triển khai Beta",
+            "milestone_finish": "Hoàn thành dự án",
+            "schedule_modal_title": "Cấu hình Lộ trình",
+            "schedule_desc": "Xác định thời gian bắt đầu và kết thúc của dự án để căn chỉnh biểu đồ Gantt.",
+            "project_range": "Tổng thời gian"
+        },
+        "team": {
+            "title": "Đội ngũ dự án",
+            "invite": "Mời",
+            "manage": "Quản lý truy cập"
+        },
+        "charts": {
+            "distribution": "Phân bổ công việc",
+            "done": "Đã xong",
+            "in_progress": "Đang làm",
+            "remaining": "Còn lại",
+            "velocity": "Tốc độ trung bình",
+            "mood": "Trạng thái nhóm",
+            "optimal": "Tối ưu"
+        },
+        "focus": {
+            "title": "Chế độ tập trung",
+            "critical": "Đường găng (Critical Path)",
+            "overdue": "Quá hạn",
+            "milestones": "Chỉ mốc quan trọng"
+        },
+        "mytasks": {
+            "narrative": "DIỄN GIẢI DỰ ÁN",
+            "search": "Tìm kiếm công việc...",
+            "board": "Bảng",
+            "list": "Danh sách",
+            "filters": "Bộ lọc",
+            "add_new": "Thêm mới",
+            "add_task": "Thêm công việc",
+            "board_title": "Quy trình dự án",
+            "load_fail": "Lỗi khi tải công việc",
+            "move_success": "Đã chuyển sang {{status}}",
+            "update_status_fail": "Lỗi khi cập nhật trạng thái",
+            "delete_confirm_title": "Xóa nhiệm vụ?",
+            "delete_confirm_msg": "Hành động này không thể hoàn tác.",
+            "btn_delete": "Xóa",
+            "delete_success": "Đã xóa nhiệm vụ",
+            "delete_fail": "Lỗi khi xóa nhiệm vụ",
+            "calendar_title": "Lịch công việc",
+            "all_tasks_label": "Tất cả công việc",
+            "progress_tooltip": "Tiến độ",
+            "col_task": "Công việc",
+            "no_task_found": "Không tìm thấy công việc",
+            "add_success": "Đã tạo nhiệm vụ",
+            "status_todo": "Cần làm",
+            "status_in_progress": "Đang làm",
+            "status_review": "Xem xét",
+            "status_waiting": "Chờ duyệt",
+            "status_done": "Hoàn thành"
+        },
+        "files": {
+            "resource_library": "TÀI LIỆU DỰ ÁN",
+            "project_assets": "Kho lưu trữ tệp",
+            "search": "Tìm tài liệu...",
+            "upload": "Tải tệp lên",
+            "drop_zone": "Nhấp hoặc kéo tệp vào đây để tải lên",
+            "storage_usage": "Hạn mức lưu trữ dự án",
+            "used": "Đã dùng",
+            "total": "trên",
+            "license": "Giấy phép hoạt động",
+            "load_fail": "Lỗi khi tải tệp tin",
+            "upgrade_storage": "Mua thêm dung lượng"
+        }
+    }
+}

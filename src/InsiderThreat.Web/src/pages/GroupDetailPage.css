@@ -1,0 +1,217 @@
+.groupDetail-container {
+    display: flex;
+    min-height: 100vh;
+    background: var(--color-bg);
+    overflow: hidden;
+}
+
+.groupDetail-main-wrapper {
+    flex: 1;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--color-bg);
+}
+
+.dark .groupDetail-main-wrapper {
+    background: var(--color-bg);
+}
+
+.groupDetail {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Header Section */
+.groupDetail-top-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.groupDetail-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.backBtn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+}
+
+.backBtn:hover {
+    background: var(--color-surface-hover);
+    transform: translateX(-2px);
+}
+
+.project-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+}
+
+.bc-sep {
+    font-size: 11px;
+    opacity: 0.5;
+}
+
+.bc-active {
+    color: var(--color-text-main);
+    font-weight: 700;
+}
+
+.groupTitle {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.groupSubtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 6px 0 0 0;
+    font-weight: 500;
+}
+
+/* Tab Navigation Wrapper */
+.groupDetail-tabs-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 4px;
+}
+
+.groupDetail-tabs {
+    display: flex;
+    gap: 24px;
+}
+
+.tabItem {
+    background: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    padding: 12px 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tabItem .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.tabItem:hover {
+    color: var(--color-text-main);
+}
+
+.tabItem.active {
+    color: var(--color-primary, #1d4ed8);
+}
+
+.tabItem.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--color-primary, #1d4ed8);
+    border-radius: 3px 3px 0 0;
+}
+
+/* Project Actions */
+.project-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.proj-action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.proj-action-btn:hover {
+    background: var(--color-background);
+    color: var(--color-text-main);
+    border-color: var(--color-primary);
+}
+
+.proj-action-btn.delete:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+    background: #fef2f2;
+}
+
+/* Body */
+.groupDetail-body {
+    flex: 1;
+    min-height: 600px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile responsive */
+@media (max-width: 1024px) {
+    .groupDetail-main-wrapper {
+        height: auto;
+        padding-bottom: 80px;
+    }
+    .groupDetail {
+        padding: 16px;
+        gap: 24px;
+    }
+    .groupTitle {
+        font-size: 24px;
+    }
+    .groupDetail-tabs {
+        gap: 16px;
+    }
+    .tabItem {
+        font-size: 13px;
+    }
+    .tabItem span {
+        display: none;
+    }
+    .project-actions {
+        display: none;
+    }
+}

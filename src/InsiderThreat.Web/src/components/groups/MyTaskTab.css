@@ -1,0 +1,360 @@
+.myTaskTab {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 10px;
+    background: transparent;
+}
+
+/* --- Topbar --- */
+.myTask-topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.task-project-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.task-project-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-text-main);
+}
+
+.topBar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.view-switcher {
+    display: flex;
+    background: var(--color-surface-lighter);
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+/* --- Kanban Board --- */
+.kanbanBoard {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    align-items: flex-start;
+}
+
+.kanbanColumn {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    background: var(--color-surface-lighter);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid var(--color-border);
+    transition: background 0.2s;
+}
+
+.kanbanColumn.dragging-over {
+    background: var(--color-primary-light);
+}
+
+.colHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+}
+
+.colTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-main);
+}
+
+.colDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.colCount {
+    background: var(--color-bg);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+}
+
+.kanbanCardsList {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* --- Modern Card --- */
+.modern-kCard {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.modern-kCard:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modern-kCard.is-dragging {
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: rotate(2deg);
+}
+
+.kCard-tagRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kCard-date {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.kCard-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-main);
+    line-height: 1.4;
+}
+
+.kCard-description {
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    overflow: hidden;
+}
+
+.kCard-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+}
+
+/* --- List View --- */
+.modern-list {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.list-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr 1fr 1fr;
+    padding: 12px 20px;
+    background: var(--color-surface-lighter);
+    border-bottom: 1px solid var(--color-border);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.list-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr 1fr 1fr;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border);
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.list-row:hover {
+    background: var(--color-surface-lighter);
+}
+
+.list-col.title {
+    font-weight: 600;
+    color: var(--color-text-main);
+}
+
+.list-col.date {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.loading-tasks {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .kanbanBoard { flex-direction: column; }
+    .kanbanColumn { min-width: unset; max-width: unset; }
+}
+
+/* ─── Task Timeline (Mock) ─── */
+.task-timeline-wrapper {
+    background: #f1f5f9; /* Light gray for light mode */
+    border-radius: 16px;
+    border: 1px solid var(--color-border);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+:global(.dark) .task-timeline-wrapper {
+    background: #0f172a; /* Deep dark blue for premium look */
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.task-timeline-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+
+:global(.dark) .task-timeline-wrapper::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.timeline-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+.timeline-container {
+    position: relative;
+    padding-top: 20px;
+}
+
+.timeline-row.days {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    padding: 0 5%;
+}
+
+.timeline-row.grid-lines {
+    display: flex;
+    position: absolute;
+    top: 50px;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    z-index: 0;
+}
+
+.grid-col {
+    flex: 1;
+    border-left: 1px dashed var(--color-border);
+    opacity: 0.5;
+}
+
+.grid-col.active-col {
+    border-left: 2px solid var(--color-primary);
+}
+
+.timeline-bubbles {
+    position: relative;
+    height: 120px;
+    z-index: 1;
+}
+
+.t-bubble {
+    position: absolute;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.t-date {
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.t-bubble.gray {
+    background: var(--color-surface-lighter);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-border);
+}
+
+.t-bubble.black {
+    background: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px var(--color-primary-light);
+}
+
+.t-bubble.disabled {
+    background: transparent;
+    border: 1px dashed var(--color-border);
+    color: var(--color-text-muted);
+}
+
+.all-tasks-header {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text-main);
+}

@@ -1,0 +1,408 @@
+.staffPageContainer {
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    padding-bottom: var(--bottom-nav-height);
+    display: flex;
+    align-items: flex-start;
+}
+
+.staffMainWrapper {
+    flex: 1;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.staffHeaderMobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 20px 16px;
+}
+
+.staffTitleMobile {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--color-text-main);
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.addStaffBtn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    cursor: pointer;
+}
+
+.staffSearchMobile {
+    padding: 0 20px 24px;
+}
+
+.staffSearchInputWrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--color-surface);
+    border-radius: 16px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border);
+}
+
+.staffSearchInputWrapper span {
+    color: var(--color-text-muted);
+    font-size: 24px;
+}
+
+.staffSearchInputWrapper input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text-main);
+    background: transparent;
+}
+
+.staffMainContent {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.staffSection {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.staffSectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.staffSectionHeader h2 {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.staffSectionHeader span {
+    color: var(--color-border);
+    font-size: 20px;
+}
+
+.suggestionsList {
+    background-color: var(--color-surface);
+    border-radius: 24px;
+    padding: 8px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--color-border);
+}
+
+.suggestionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+}
+
+.suggestionItem:not(:last-child) {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.suggestionLeft {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.suggestionAvatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-surface);
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.onlineIndicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    border: 2.5px solid var(--color-surface);
+}
+
+.suggestionInfo h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin: 0 0 4px;
+}
+
+.statusText {
+    font-size: 10px;
+    font-weight: 800;
+    color: #10b981;
+    letter-spacing: 0.02em;
+}
+
+.nameBadgeRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
+.roleBadge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.role-admin {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+.role-manager {
+    background-color: #f0fdf4;
+    color: #16a34a;
+}
+
+.role-director {
+    background-color: #fff7ed;
+    color: #ea580c;
+}
+
+.role-staff {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+
+.chatQuickBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chatQuickBtn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+}
+
+.deptGridMobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.deptCardMobile {
+    background-color: var(--color-surface);
+    border-radius: 24px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.deptIconWrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deptIconWrapper span {
+    font-size: 24px;
+}
+
+.deptCardInfo h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin: 0 0 4px;
+}
+
+.deptCardInfo span {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+    .staffPageContainer {
+        display: flex;
+        background-color: var(--color-bg);
+        padding-bottom: 0;
+    }
+
+    .staffMainWrapper {
+        flex: 1;
+        max-width: 1200px;
+        padding: 0;
+        padding-top: 24px;
+        padding-right: 24px;
+        padding-left: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .staffHeaderMobile {
+        padding: 0;
+    }
+
+    .staffSearchMobile {
+        padding: 0;
+    }
+
+    .staffMainContent {
+        padding: 0;
+    }
+
+    .deptGridMobile {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Header Actions Styles */
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.actionBtn {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text-main);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0 12px;
+}
+
+.orgChartBtn {
+    background: linear-gradient(135deg, var(--color-primary), #6366f1);
+    border: none;
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.orgChartBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+.orgChartBtn span:not(.material-symbols-outlined) {
+    display: none;
+}
+
+.configBtn {
+    width: 40px;
+    padding: 0;
+    color: var(--color-text-muted);
+}
+
+.configBtn:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.addStaffBtnPrimary {
+    width: 40px;
+    padding: 0;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+}
+
+.addStaffBtnPrimary:hover {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+@media (min-width: 768px) {
+    .orgChartBtn span:not(.material-symbols-outlined) {
+        display: block;
+    }
+    
+    .headerActions {
+        gap: 12px;
+    }
+    
+    .actionBtn {
+        height: 44px;
+        padding: 0 16px;
+    }
+    
+    .configBtn, .addStaffBtnPrimary {
+        width: 44px;
+        padding: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .deptGridMobile {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 768px) {
+    .staffMainWrapper {
+        padding: 0;
+        padding-top: 40px;
+        padding-right: 40px;
+        padding-left: 56px;
+    }
+
+    .deptGridMobile {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

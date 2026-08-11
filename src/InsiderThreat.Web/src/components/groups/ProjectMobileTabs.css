@@ -1,0 +1,60 @@
+.project-mobile-tabs-container {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .project-mobile-tabs-container {
+        display: block;
+        width: 100%;
+        background: #fff;
+        padding: 4px 16px;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 12px;
+        position: sticky;
+        top: 0; /* Sticky below header if possible */
+        z-index: 50;
+    }
+
+    .project-mobile-tabs-scroll {
+        display: flex;
+        overflow-x: auto;
+        gap: 8px;
+        padding: 4px 0;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .project-mobile-tabs-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .mobile-tab-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        background: #f9fafb;
+        color: #4b5563;
+        font-size: 13px;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: all 0.2s;
+    }
+
+    .mobile-tab-btn:active {
+        transform: scale(0.95);
+    }
+
+    .mobile-tab-btn.active {
+        background: #ecf0f1;
+        color: #2c3e50;
+        border-color: #bdc3c7;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .mobile-tab-btn .material-symbols-outlined {
+        font-size: 18px;
+    }
+}

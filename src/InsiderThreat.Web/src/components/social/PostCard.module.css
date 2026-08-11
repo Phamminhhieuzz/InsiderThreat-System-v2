@@ -1,0 +1,238 @@
+.card {
+    background-color: var(--color-surface);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px var(--color-border);
+}
+
+.card :global(.ant-card-body) {
+    padding: 12px 16px 4px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.userInfo {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.dot {
+    margin: 0 2px;
+}
+
+.moreBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.moreBtn:hover {
+    background-color: var(--color-surface-lighter);
+}
+
+/* Content */
+.content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text-main) !important;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    opacity: 1 !important;
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.likeIcon {
+    font-size: 18px;
+}
+
+.interactions {
+    display: flex;
+    gap: 8px;
+}
+
+.interactions span {
+    cursor: pointer;
+}
+
+.interactions span:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: 4px 0 8px;
+}
+
+/* Actions */
+.actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+.action:hover {
+    background-color: var(--color-surface-lighter);
+}
+
+.action:active {
+    transform: scale(0.98);
+}
+
+.action.liked {
+    color: var(--color-primary);
+}
+
+/* Premium Poll Styles */
+:global(.poll-container-premium) {
+    margin-top: 16px;
+    padding: 20px;
+    background: var(--color-surface-lighter);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) :global(.poll-container-premium) {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+:global(.poll-option-interactive) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:global(.poll-option-interactive:hover) {
+    border-color: #3b82f6;
+    background: #f8faff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+:global(.poll-result-bar) {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-surface-lighter);
+    border-radius: 12px;
+    transition: all 0.4s ease;
+}
+
+:global(.dark) :global(.poll-result-bar) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+:global(.poll-result-bar.voted) {
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+}
+
+:global(.poll-progress-liquid) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 12px;
+    transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+:global(.poll-progress-liquid::after) {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+:global(.admin-poll-analytics) {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

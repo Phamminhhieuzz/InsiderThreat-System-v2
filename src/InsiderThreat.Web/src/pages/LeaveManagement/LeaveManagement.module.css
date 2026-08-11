@@ -1,0 +1,212 @@
+.layout {
+    min-height: 100vh;
+    background-color: var(--color-bg);
+}
+
+.content {
+    padding: 0;
+    margin-top: 64px; /* offset for header */
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+}
+
+.mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    background-color: var(--color-bg);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-surface);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.pageTitle {
+    margin: 0 !important;
+    color: var(--color-text-main) !important;
+    font-weight: 700 !important;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.statCard {
+    background: var(--color-surface) !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.statCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.statCard :global(.ant-card-body) {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+}
+
+.statIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.statInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.statValue {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-text-main);
+    margin-bottom: 4px;
+}
+
+.statLabel {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.tableCard {
+    background: var(--color-surface) !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+}
+
+.tableCard :global(.ant-card-head-title) {
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+.tableCard :global(.ant-table) {
+    background: transparent !important;
+}
+
+.formActions {
+    margin-top: 24px;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+/* ===== MOBILE RESPONSIVENESS ===== */
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .mainContent {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .header {
+        padding: 16px;
+    }
+
+    .statCard :global(.ant-card-body) {
+        padding: 16px;
+    }
+
+    .statIcon {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+    }
+
+    .statValue {
+        font-size: 24px;
+    }
+
+    /* Target the sidebar directly if it's not hidden by its own component */
+    .container > :global(div:first-child) {
+        display: none !important;
+    }
+
+    .mobileList {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .mobileCard {
+        background: var(--color-surface-lighter);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .cardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: 8px;
+    }
+
+    .cardBody {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .cardRow {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+    }
+
+    .cardActions {
+        display: flex;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .emptyState {
+        text-align: center;
+        padding: 32px 16px;
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+
+    .tableCard :global(.ant-card-body) {
+        padding: 12px !important;
+    }
+}
+
+.layout :global(.ant-layout-content) {
+    padding-bottom: var(--bottom-nav-height, 72px) !important;
+}

@@ -1,0 +1,25 @@
+.git
+.gitignore
+.github
+
+# Build output
+**/bin
+**/obj
+
+# Thư mục repo nhân bản/backup cũ, không cần trong image
+InsiderThreat-GitHub
+
+# Frontend không thuộc image backend
+**/node_modules
+**/dist
+src/InsiderThreat.Web
+
+# Log/rác build local
+*.txt
+!requirements.txt
+db_dump.json
+
+# IDE
+.vs
+.vscode
+.idea

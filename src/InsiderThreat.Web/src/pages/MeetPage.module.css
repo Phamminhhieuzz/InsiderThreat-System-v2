@@ -1,0 +1,419 @@
+.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--color-bg);
+}
+
+/* Sidebar styling for desktop */
+.sidebarContainer {
+    width: 250px;
+    flex-shrink: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Content area styling */
+.mainContent {
+    flex: 1;
+    margin-left: 250px;
+    padding-bottom: 0;
+    height: 100vh;
+}
+
+/* Bottom Navigation constraint - Hidden on desktop, visible on mobile */
+.bottomNavContainer {
+    display: none;
+}
+
+/* ===== Meeting Container ===== */
+.meetingContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Room Info Bar */
+.roomInfoBar {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 14px;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* ===== Video Grid ===== */
+.videoGrid {
+    display: grid;
+    gap: 8px;
+    flex: 1;
+    padding: 8px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    align-content: center;
+    overflow-y: auto;
+}
+
+.videoTile {
+    position: relative;
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 200px;
+}
+
+.videoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.videoOff {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2a2a2a;
+}
+
+.nameTag {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+/* ===== Spotlight layout (khi ghim video) ===== */
+.spotlightLayout {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 8px;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.spotlightSidebarLayout {
+    display: flex;
+    flex-direction: row; /* Thumbnails on left, main on right */
+    flex: 1;
+    padding: 8px;
+    gap: 12px;
+    overflow: hidden;
+}
+
+.sidebarThumbnails {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    flex-shrink: 0;
+    gap: 8px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.sidebarThumbnails .videoTile {
+    width: 100%;
+    height: 140px;
+    min-height: 140px;
+    flex-shrink: 0;
+}
+
+.videoTileLarge {
+    position: relative;
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+    border: 2px solid #1890ff;
+}
+
+.thumbnailRow {
+    display: flex;
+    gap: 8px;
+    height: 120px;
+    flex-shrink: 0;
+    overflow-x: auto;
+}
+
+.thumbnailRow .videoTile {
+    width: 180px;
+    flex-shrink: 0;
+    min-height: 100px;
+}
+
+/* ===== Control Bar ===== */
+.controlBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 16px;
+    background: #1a1a2e;
+    flex-shrink: 0;
+}
+
+.controlBtn {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 20px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Waiting Banner ===== */
+.waitingBanner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #16213e;
+    color: #faad14;
+    font-size: 13px;
+    flex-shrink: 0;
+    border-bottom: 1px solid #333;
+}
+
+/* ===== Right Panel ===== */
+.rightPanel {
+    width: 320px;
+    flex-shrink: 0;
+    background: #1a1a2e;
+    border-left: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.panelBody {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    color: #ddd;
+}
+
+/* ===== Participants ===== */
+.participantItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    background: #16213e;
+}
+
+.participantName {
+    color: #ddd;
+    font-size: 13px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ===== Chat ===== */
+.chatPanel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+}
+
+.chatBody {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chatEntry {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+}
+
+.chatSpeaker {
+    color: #1890ff;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.chatTime {
+    color: #555;
+    font-size: 11px;
+    margin-left: 6px;
+}
+
+.chatBubble {
+    padding: 7px 12px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.chatInput {
+    padding: 8px;
+    border-top: 1px solid #333;
+    flex-shrink: 0;
+}
+
+/* ===== Hand Raised Badge ===== */
+.handRaised {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 20px;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.8));
+}
+
+/* ===== Transcript Panel ===== */
+.transcriptPanel {
+    width: 300px;
+    flex-shrink: 0;
+    background: #1a1a2e;
+    border-left: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.transcriptHeader {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    background: #16213e;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+    border-bottom: 1px solid #333;
+}
+
+.transcriptBody {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.transcriptEntry {
+    margin-bottom: 10px;
+    background: #16213e;
+    border-radius: 6px;
+    padding: 8px 10px;
+}
+
+.transcriptSpeaker {
+    color: #1890ff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.transcriptTime {
+    color: #666;
+    font-size: 11px;
+    margin-left: 8px;
+}
+
+.transcriptText {
+    color: #ddd;
+    font-size: 13px;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.transcriptListening {
+    padding: 6px 12px;
+    background: rgba(245, 34, 45, 0.1);
+    color: #f5222d;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    border-top: 1px solid #333;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebarContainer {
+        display: none;
+    }
+
+    .mainContent {
+        margin-left: 0;
+        margin-bottom: 60px;
+        height: calc(100vh - 60px);
+    }
+
+    .bottomNavContainer {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        z-index: 1000;
+        background-color: var(--color-surface);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .videoGrid {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 4px;
+    }
+
+    .videoTile {
+        min-height: 140px;
+    }
+
+    .controlBar {
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .controlBtn {
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 18px !important;
+    }
+
+    .roomInfoBar {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
