@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { List, Avatar, Badge, Button, Tag, Space, Typography, Spin, Empty, App } from 'antd';
 import { 
     BellOutlined, CheckCircleOutlined, MessageOutlined, 
@@ -30,6 +31,7 @@ interface Notification {
 }
 
 export default function InboxPage() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const { message: antdMessage } = App.useApp();
     const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -70,9 +72,9 @@ export default function InboxPage() {
         try {
             await api.put('/api/notifications/read-all', {});
             setNotifications(notifications.map(n => ({ ...n, isRead: true })));
-            antdMessage.success('Đã đánh dấu tất cả là đã đọc');
+            antdMessage.success(t('inbox.mark_all_read_success', 'Đã đánh dấu tất cả là đã đọc'));
         } catch (error) {
-            antdMessage.error('Thao tác thất bại');
+            antdMessage.error(t('inbox.mark_all_read_fail', 'Thao tác thất bại'));
         }
     };
 
@@ -80,9 +82,9 @@ export default function InboxPage() {
         try {
             await api.delete('/api/notifications/read');
             setNotifications(notifications.filter(n => !n.isRead));
-            antdMessage.success('Đã xóa tất cả thông báo đã đọc');
+            antdMessage.success(t('inbox.delete_read_success', 'Đã xóa tất cả thông báo đã đọc'));
         } catch (error) {
-            antdMessage.error('Xóa thất bại');
+            antdMessage.error(t('inbox.delete_read_fail', 'Xóa thất bại'));
         }
     };
 
@@ -111,29 +113,29 @@ export default function InboxPage() {
                 <main className="inbox-content animate-in">
                     <header className="inbox-header">
                         <div className="header-left">
-                            <Title level={2} className="inbox-title">Inbox</Title>
+                            <Title level={2} className="inbox-title">{t('inbox.title', 'Inbox')}</Title>
                             <Text type="secondary" className="inbox-subtitle">
-                                Luôn cập nhật những thay đổi mới nhất trong các dự án của bạn.
+                                {t('inbox.subtitle', 'Luôn cập nhật những thay đổi mới nhất trong các dự án của bạn.')}
                             </Text>
                         </div>
                         <div className="header-right">
                             <Space>
-                                <Button 
-                                    type="text" 
-                                    icon={<CheckCircleOutlined />} 
+                                <Button
+                                    type="text"
+                                    icon={<CheckCircleOutlined />}
                                     onClick={markAllAsRead}
                                     className="action-btn"
                                 >
-                                    Đánh dấu đã đọc hết
+                                    {t('inbox.mark_all_read', 'Đánh dấu đã đọc hết')}
                                 </Button>
-                                <Button 
+                                <Button
                                     danger
-                                    type="text" 
-                                    icon={<DeleteOutlined />} 
+                                    type="text"
+                                    icon={<DeleteOutlined />}
                                     onClick={deleteReadNotifications}
                                     className="action-btn delete-btn"
                                 >
-                                    Xóa hết đã đọc
+                                    {t('inbox.delete_read', 'Xóa hết đã đọc')}
                                 </Button>
                             </Space>
                         </div>
@@ -142,45 +144,45 @@ export default function InboxPage() {
                     <div className="inbox-filter-bar">
                         <Space size="middle">
                             <Badge count={activeFilter === 'all' ? notifications.filter(n => !n.isRead).length : 0} offset={[10, 0]}>
-                                <Tag 
+                                <Tag
                                     className={`filter-tag ${activeFilter === 'all' ? 'active' : ''}`}
                                     onClick={() => setActiveFilter('all')}
                                 >
-                                    Tất cả
+                                    {t('inbox.filter_all', 'Tất cả')}
                                 </Tag>
                             </Badge>
-                            <Tag 
+                            <Tag
                                 className={`filter-tag ${activeFilter === 'unread' ? 'active' : ''}`}
                                 onClick={() => setActiveFilter('unread')}
                             >
-                                Chưa đọc
+                                {t('inbox.filter_unread', 'Chưa đọc')}
                             </Tag>
-                            <Tag 
+                            <Tag
                                 className={`filter-tag ${activeFilter === 'tasks' ? 'active' : ''}`}
                                 onClick={() => setActiveFilter('tasks')}
                             >
-                                Giao việc
+                                {t('inbox.filter_tasks', 'Giao việc')}
                             </Tag>
-                            <Tag 
+                            <Tag
                                 className={`filter-tag ${activeFilter === 'discussion' ? 'active' : ''}`}
                                 onClick={() => setActiveFilter('discussion')}
                             >
-                                Thảo luận
+                                {t('inbox.filter_discussion', 'Thảo luận')}
                             </Tag>
                         </Space>
                     </div>
 
                     <div className="inbox-list-wrapper">
                         {loading ? (
-                            <div className="loading-state"><Spin size="large" tip="Đang tải thông báo..." /></div>
+                            <div className="loading-state"><Spin size="large" tip={t('inbox.loading', 'Đang tải thông báo...')} /></div>
                         ) : filteredNotifications.length === 0 ? (
-                            <Empty 
+                            <Empty
                                 image={<MailOutlined style={{ fontSize: 64, color: 'var(--color-border)' }} />}
                                 description={
-                                    activeFilter === 'unread' ? "Không có thông báo chưa đọc" :
-                                    activeFilter === 'tasks' ? "Không có nhiệm vụ nào" :
-                                    activeFilter === 'discussion' ? "Không có thảo luận nào" :
-                                    "Hộp thư của bạn đang trống"
+                                    activeFilter === 'unread' ? t('inbox.empty_unread', 'Không có thông báo chưa đọc') :
+                                    activeFilter === 'tasks' ? t('inbox.empty_tasks', 'Không có nhiệm vụ nào') :
+                                    activeFilter === 'discussion' ? t('inbox.empty_discussion', 'Không có thảo luận nào') :
+                                    t('inbox.empty_all', 'Hộp thư của bạn đang trống')
                                 }
                                 className="empty-inbox"
                             />
@@ -202,7 +204,7 @@ export default function InboxPage() {
                                             </div>
                                             <div className="card-body">
                                                 <div className="card-header">
-                                                    <Text strong className="actor-name">{n.actorName || 'Hệ thống'}</Text>
+                                                    <Text strong className="actor-name">{n.actorName || t('inbox.system', 'Hệ thống')}</Text>
                                                     <Text className="time-stamp">{dayjs(n.createdAt).fromNow()}</Text>
                                                 </div>
                                                 <div className="card-message">
@@ -227,7 +229,7 @@ export default function InboxPage() {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="chat-button-icon">
                     <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
                 </svg>
-                <span>Tin nhắn</span>
+                <span>{t('inbox.chat_button', 'Tin nhắn')}</span>
             </div>
 
             {isMobile && <BottomNavigation />}

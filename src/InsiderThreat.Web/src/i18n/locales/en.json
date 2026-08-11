@@ -706,5 +706,26 @@
             "load_fail": "File loading failed",
             "upgrade_storage": "Buy More Storage"
         }
+    },
+    "inbox": {
+        "title": "Inbox",
+        "subtitle": "Stay up to date with the latest changes in your projects.",
+        "mark_all_read": "Mark all as read",
+        "delete_read": "Delete all read",
+        "filter_all": "All",
+        "filter_unread": "Unread",
+        "filter_tasks": "Tasks",
+        "filter_discussion": "Discussion",
+        "loading": "Loading notifications...",
+        "empty_unread": "No unread notifications",
+        "empty_tasks": "No tasks",
+        "empty_discussion": "No discussions",
+        "empty_all": "Your inbox is empty",
+        "system": "System",
+        "chat_button": "Messages",
+        "mark_all_read_success": "All notifications marked as read",
+        "mark_all_read_fail": "Action failed",
+        "delete_read_success": "All read notifications deleted",
+        "delete_read_fail": "Delete failed"
     }
 }

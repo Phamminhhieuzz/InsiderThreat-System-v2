@@ -706,5 +706,26 @@
             "load_fail": "Lỗi khi tải tệp tin",
             "upgrade_storage": "Mua thêm dung lượng"
         }
+    },
+    "inbox": {
+        "title": "Hộp thư",
+        "subtitle": "Luôn cập nhật những thay đổi mới nhất trong các dự án của bạn.",
+        "mark_all_read": "Đánh dấu đã đọc hết",
+        "delete_read": "Xóa hết đã đọc",
+        "filter_all": "Tất cả",
+        "filter_unread": "Chưa đọc",
+        "filter_tasks": "Giao việc",
+        "filter_discussion": "Thảo luận",
+        "loading": "Đang tải thông báo...",
+        "empty_unread": "Không có thông báo chưa đọc",
+        "empty_tasks": "Không có nhiệm vụ nào",
+        "empty_discussion": "Không có thảo luận nào",
+        "empty_all": "Hộp thư của bạn đang trống",
+        "system": "Hệ thống",
+        "chat_button": "Tin nhắn",
+        "mark_all_read_success": "Đã đánh dấu tất cả là đã đọc",
+        "mark_all_read_fail": "Thao tác thất bại",
+        "delete_read_success": "Đã xóa tất cả thông báo đã đọc",
+        "delete_read_fail": "Xóa thất bại"
     }
 }
