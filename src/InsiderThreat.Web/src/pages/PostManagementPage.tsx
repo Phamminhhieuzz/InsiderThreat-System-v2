@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Table, Button, message, Popconfirm, Avatar, Tag, Space } from 'antd';
 import { DeleteOutlined, EyeOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { api } from '../services/api';
 import type { Post } from '../types';
 import type { ColumnsType } from 'antd/es/table';
 
 
 function PostManagementPage() {
+    const { t } = useTranslation();
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(false);
     const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
@@ -30,7 +32,7 @@ function PostManagementPage() {
                 total: data.pagination.totalCount
             });
         } catch (error) {
-            message.error('Lỗi tải danh sách bài viết!');
+            message.error(t('post_management.fetch_fail', 'Lỗi tải danh sách bài viết!'));
         } finally {
             setLoading(false);
         }
@@ -47,16 +49,16 @@ function PostManagementPage() {
     const handleDelete = async (id: string) => {
         try {
             await api.delete(`/api/SocialFeed/posts/${id}`);
-            message.success('Đã xóa bài viết thành công');
+            message.success(t('post_management.delete_success', 'Đã xóa bài viết thành công'));
             fetchPosts(pagination.current, pagination.pageSize);
         } catch (error) {
-            message.error('Lỗi khi xóa bài viết');
+            message.error(t('post_management.delete_fail', 'Lỗi khi xóa bài viết'));
         }
     };
 
     const columns: ColumnsType<Post> = [
         {
-            title: 'Tác giả',
+            title: t('post_management.col_author', 'Tác giả'),
             key: 'author',
             render: (_, record) => (
                 <Space>
@@ -69,7 +71,7 @@ function PostManagementPage() {
             ),
         },
         {
-            title: 'Nội dung',
+            title: t('post_management.col_content', 'Nội dung'),
             dataIndex: 'content',
             key: 'content',
             width: '40%',
@@ -81,7 +83,7 @@ function PostManagementPage() {
             ),
         },
         {
-            title: 'Thống kê',
+            title: t('post_management.col_stats', 'Thống kê'),
             key: 'stats',
             render: (_, record) => (
                 <Space orientation="vertical" size="small">
@@ -91,28 +93,28 @@ function PostManagementPage() {
             ),
         },
         {
-            title: 'Ngày tạo',
+            title: t('post_management.col_created', 'Ngày tạo'),
             dataIndex: 'createdAt',
             key: 'createdAt',
             render: (date) => new Date(date).toLocaleString('vi-VN'),
         },
         {
-            title: 'Thao tác',
+            title: t('post_management.col_action', 'Thao tác'),
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
                     <Popconfirm
-                        title="Bạn có chắc muốn xóa bài viết này?"
-                        description="Hành động này không thể hoàn tác."
+                        title={t('post_management.confirm_delete_title', 'Bạn có chắc muốn xóa bài viết này?')}
+                        description={t('post_management.confirm_delete_desc', 'Hành động này không thể hoàn tác.')}
                         onConfirm={() => handleDelete(record.id)}
-                        okText="Xóa"
-                        cancelText="Hủy"
+                        okText={t('post_management.confirm_delete_ok', 'Xóa')}
+                        cancelText={t('post_management.confirm_delete_cancel', 'Hủy')}
                     >
                         <Button
                             danger
                             icon={<DeleteOutlined />}
                         >
-                            Xóa
+                            {t('post_management.delete', 'Xóa')}
                         </Button>
                     </Popconfirm>
                 </Space>
@@ -123,7 +125,7 @@ function PostManagementPage() {
     return (
         <div style={{ padding: 24 }}>
             <div style={{ marginBottom: 16 }}>
-                <h2>📝 Quản lý Bài viết</h2>
+                <h2>📝 {t('post_management.title', 'Quản lý Bài viết')}</h2>
             </div>
 
             {isMobile ? (
@@ -131,8 +133,8 @@ function PostManagementPage() {
                     {posts.length === 0 && !loading ? (
                         <div className="empty-incidents">
                             <span className="material-symbols-outlined empty-icon">feed</span>
-                            <h3>Không có bài viết</h3>
-                            <p>Hệ thống hiện chưa có bài đăng nào.</p>
+                            <h3>{t('post_management.empty_title', 'Không có bài viết')}</h3>
+                            <p>{t('post_management.empty_desc', 'Hệ thống hiện chưa có bài đăng nào.')}</p>
                         </div>
                     ) : (
                         <div className="incident-cards-container">
@@ -148,10 +150,10 @@ function PostManagementPage() {
                                                 </Tag>
                                             </div>
                                             <Popconfirm
-                                                title="Xóa bài viết?"
+                                                title={t('post_management.confirm_delete_title_short', 'Xóa bài viết?')}
                                                 onConfirm={() => handleDelete(post.id)}
-                                                okText="Xóa"
-                                                cancelText="Hủy"
+                                                okText={t('post_management.confirm_delete_ok', 'Xóa')}
+                                                cancelText={t('post_management.confirm_delete_cancel', 'Hủy')}
                                             >
                                                 <Button type="text" danger icon={<DeleteOutlined />} />
                                             </Popconfirm>
@@ -174,12 +176,12 @@ function PostManagementPage() {
                                 </div>
                             ))}
                             <div style={{ display: 'flex', justifyContent: 'center', padding: '16px 0' }}>
-                                <Button 
+                                <Button
                                     onClick={() => handleTableChange({ ...pagination, current: pagination.current + 1 })}
                                     disabled={pagination.current * pagination.pageSize >= pagination.total}
                                     loading={loading}
                                 >
-                                    Xem thêm
+                                    {t('post_management.load_more', 'Xem thêm')}
                                 </Button>
                             </div>
                         </div>

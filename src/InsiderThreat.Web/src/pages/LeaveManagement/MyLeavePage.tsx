@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Typography, Card, Table, Button, Modal, Form, DatePicker, Select, Input, Tag, message, Space } from 'antd';
 import { PlusOutlined, CalendarOutlined, FileTextOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import NavigationBar from '../../components/NavigationBar';
 import LeftSidebar from '../../components/LeftSidebar';
 import { leaveService } from '../../services/leaveService';
@@ -16,6 +17,7 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 const MyLeavePage = () => {
+    const { t } = useTranslation();
     const [user, setUser] = useState<User>(JSON.parse(localStorage.getItem('user') || '{}'));
     const [requests, setRequests] = useState<LeaveRequest[]>([]);
     const [loading, setLoading] = useState(false);
@@ -34,7 +36,7 @@ const MyLeavePage = () => {
             setRequests(data);
         } catch (error) {
             console.error('Failed to fetch leave requests:', error);
-            message.error('Không thể tải lịch sử nghỉ phép.');
+            message.error(t('leave.my_leave.fetch_fail', 'Không thể tải lịch sử nghỉ phép.'));
         } finally {
             setLoading(false);
         }
@@ -54,17 +56,17 @@ const MyLeavePage = () => {
             };
 
             const response = await leaveService.createRequest(payload);
-            message.success('Đã gửi yêu cầu nghỉ phép thành công.');
+            message.success(t('leave.my_leave.create_success', 'Đã gửi yêu cầu nghỉ phép thành công.'));
             setIsModalOpen(false);
             form.resetFields();
             fetchRequests();
 
             if (response.conflicts && response.conflicts.length > 0) {
-                message.warning(`Cảnh báo: Bạn có ${response.conflicts.length} công việc đang đến hạn trong thời gian này!`);
+                message.warning(t('leave.my_leave.conflict_warning', { count: response.conflicts.length, defaultValue: `Cảnh báo: Bạn có ${response.conflicts.length} công việc đang đến hạn trong thời gian này!` }));
             }
         } catch (error: any) {
             console.error('Failed to create leave request:', error);
-            message.error(error.response?.data?.message || 'Lỗi khi gửi yêu cầu. Có thể do không đủ ngày phép.');
+            message.error(error.response?.data?.message || t('leave.my_leave.create_fail', 'Lỗi khi gửi yêu cầu. Có thể do không đủ ngày phép.'));
         } finally {
             setSubmitting(false);
         }
@@ -72,21 +74,21 @@ const MyLeavePage = () => {
 
     const columns = [
         {
-            title: 'Loại phép',
+            title: t('leave.my_leave.col_type', 'Loại phép'),
             dataIndex: 'type',
             key: 'type',
             render: (type: string) => {
                 const types: Record<string, string> = {
-                    'Annual': 'Phép năm',
-                    'Sick': 'Nghỉ ốm',
-                    'Personal': 'Việc riêng',
-                    'Maternity': 'Thai sản'
+                    'Annual': t('leave.type_annual', 'Phép năm'),
+                    'Sick': t('leave.type_sick', 'Nghỉ ốm'),
+                    'Personal': t('leave.type_personal', 'Việc riêng'),
+                    'Maternity': t('leave.type_maternity', 'Thai sản')
                 };
                 return types[type] || type;
             }
         },
         {
-            title: 'Thời gian',
+            title: t('leave.my_leave.col_time', 'Thời gian'),
             key: 'time',
             render: (_: any, record: LeaveRequest) => (
                 <Text>
@@ -95,26 +97,26 @@ const MyLeavePage = () => {
             )
         },
         {
-            title: 'Lý do',
+            title: t('leave.my_leave.col_reason', 'Lý do'),
             dataIndex: 'reason',
             key: 'reason',
             ellipsis: true,
         },
         {
-            title: 'Trạng thái',
+            title: t('leave.my_leave.col_status', 'Trạng thái'),
             dataIndex: 'status',
             key: 'status',
             render: (status: string) => {
                 let color = 'default';
                 let text = status;
-                if (status === 'Approved') { color = 'success'; text = 'Đã duyệt'; }
-                else if (status === 'Pending') { color = 'processing'; text = 'Đang chờ'; }
-                else if (status === 'Rejected') { color = 'error'; text = 'Từ chối'; }
+                if (status === 'Approved') { color = 'success'; text = t('leave.status_approved', 'Đã duyệt'); }
+                else if (status === 'Pending') { color = 'processing'; text = t('leave.status_pending', 'Đang chờ'); }
+                else if (status === 'Rejected') { color = 'error'; text = t('leave.status_rejected', 'Từ chối'); }
                 return <Tag color={color}>{text}</Tag>;
             }
         },
         {
-            title: 'Ghi chú quản lý',
+            title: t('leave.my_leave.col_manager_note', 'Ghi chú quản lý'),
             dataIndex: 'rejectionReason',
             key: 'rejectionReason',
             ellipsis: true,
@@ -129,9 +131,9 @@ const MyLeavePage = () => {
                     <LeftSidebar />
                     <div className={styles.mainContent}>
                         <div className={styles.header}>
-                            <Title level={3} className={styles.pageTitle}>Nghỉ Phép Của Tôi</Title>
+                            <Title level={3} className={styles.pageTitle}>{t('leave.my_leave.title', 'Nghỉ Phép Của Tôi')}</Title>
                             <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsModalOpen(true)}>
-                                Tạo Đơn Xin Nghỉ
+                                {t('leave.my_leave.create_btn', 'Tạo Đơn Xin Nghỉ')}
                             </Button>
                         </div>
 
@@ -142,8 +144,8 @@ const MyLeavePage = () => {
                                     <CalendarOutlined />
                                 </div>
                                 <div className={styles.statInfo}>
-                                    <div className={styles.statValue}>{user.annualLeaveBalance ?? 12} <Text type="secondary" style={{ fontSize: '14px' }}>ngày</Text></div>
-                                    <div className={styles.statLabel}>Phép năm còn lại</div>
+                                    <div className={styles.statValue}>{user.annualLeaveBalance ?? 12} <Text type="secondary" style={{ fontSize: '14px' }}>{t('leave.my_leave.days_unit', 'ngày')}</Text></div>
+                                    <div className={styles.statLabel}>{t('leave.my_leave.remaining_annual', 'Phép năm còn lại')}</div>
                                 </div>
                             </Card>
                             <Card className={styles.statCard} bordered={false}>
@@ -152,17 +154,17 @@ const MyLeavePage = () => {
                                 </div>
                                 <div className={styles.statInfo}>
                                     <div className={styles.statValue}>{requests.filter(r => r.status === 'Pending').length}</div>
-                                    <div className={styles.statLabel}>Đơn đang chờ</div>
+                                    <div className={styles.statLabel}>{t('leave.my_leave.pending_count', 'Đơn đang chờ')}</div>
                                 </div>
                             </Card>
                         </div>
 
                         {/* History Table */}
-                        <Card className={styles.tableCard} title="Lịch sử nghỉ phép" bordered={false}>
-                            <Table 
-                                columns={columns} 
-                                dataSource={requests} 
-                                rowKey="id" 
+                        <Card className={styles.tableCard} title={t('leave.my_leave.history_title', 'Lịch sử nghỉ phép')} bordered={false}>
+                            <Table
+                                columns={columns}
+                                dataSource={requests}
+                                rowKey="id"
                                 loading={loading}
                                 pagination={{ pageSize: 10 }}
                             />
@@ -173,7 +175,7 @@ const MyLeavePage = () => {
 
             {/* Create Leave Request Modal */}
             <Modal
-                title="Tạo Đơn Xin Nghỉ Phép"
+                title={t('leave.my_leave.modal_title', 'Tạo Đơn Xin Nghỉ Phép')}
                 open={isModalOpen}
                 onCancel={() => {
                     setIsModalOpen(false);
@@ -187,27 +189,27 @@ const MyLeavePage = () => {
                     onFinish={handleCreateRequest}
                     initialValues={{ type: 'Annual' }}
                 >
-                    <Form.Item name="type" label="Loại nghỉ phép" rules={[{ required: true, message: 'Vui lòng chọn loại nghỉ phép' }]}>
+                    <Form.Item name="type" label={t('leave.my_leave.form_type_label', 'Loại nghỉ phép')} rules={[{ required: true, message: t('leave.my_leave.form_type_required', 'Vui lòng chọn loại nghỉ phép') }]}>
                         <Select>
-                            <Option value="Annual">Phép năm (Có hưởng lương)</Option>
-                            <Option value="Sick">Nghỉ ốm (Có giấy xác nhận)</Option>
-                            <Option value="Personal">Việc riêng (Không hưởng lương)</Option>
-                            <Option value="Maternity">Nghỉ thai sản</Option>
+                            <Option value="Annual">{t('leave.my_leave.type_annual_full', 'Phép năm (Có hưởng lương)')}</Option>
+                            <Option value="Sick">{t('leave.my_leave.type_sick_full', 'Nghỉ ốm (Có giấy xác nhận)')}</Option>
+                            <Option value="Personal">{t('leave.my_leave.type_personal_full', 'Việc riêng (Không hưởng lương)')}</Option>
+                            <Option value="Maternity">{t('leave.my_leave.type_maternity_full', 'Nghỉ thai sản')}</Option>
                         </Select>
                     </Form.Item>
 
-                    <Form.Item name="dates" label="Thời gian" rules={[{ required: true, message: 'Vui lòng chọn thời gian nghỉ' }]}>
+                    <Form.Item name="dates" label={t('leave.my_leave.form_time_label', 'Thời gian')} rules={[{ required: true, message: t('leave.my_leave.form_time_required', 'Vui lòng chọn thời gian nghỉ') }]}>
                         <RangePicker style={{ width: '100%' }} format="DD/MM/YYYY" />
                     </Form.Item>
 
-                    <Form.Item name="reason" label="Lý do" rules={[{ required: true, message: 'Vui lòng nhập lý do' }]}>
-                        <TextArea rows={4} placeholder="Nhập lý do chi tiết..." />
+                    <Form.Item name="reason" label={t('leave.my_leave.form_reason_label', 'Lý do')} rules={[{ required: true, message: t('leave.my_leave.form_reason_required', 'Vui lòng nhập lý do') }]}>
+                        <TextArea rows={4} placeholder={t('leave.my_leave.form_reason_placeholder', 'Nhập lý do chi tiết...') as string} />
                     </Form.Item>
 
                     <Form.Item className={styles.formActions}>
                         <Space>
-                            <Button onClick={() => setIsModalOpen(false)}>Hủy</Button>
-                            <Button type="primary" htmlType="submit" loading={submitting}>Gửi Đơn</Button>
+                            <Button onClick={() => setIsModalOpen(false)}>{t('leave.my_leave.cancel', 'Hủy')}</Button>
+                            <Button type="primary" htmlType="submit" loading={submitting}>{t('leave.my_leave.submit', 'Gửi Đơn')}</Button>
                         </Space>
                     </Form.Item>
                 </Form>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Typography, Card, Table, Button, DatePicker, Tag, message, Tooltip, Space } from 'antd';
 import { DownloadOutlined, FieldTimeOutlined, CheckCircleOutlined, WarningOutlined, FileExcelOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import NavigationBar from '../../components/NavigationBar';
 import LeftSidebar from '../../components/LeftSidebar';
@@ -23,6 +24,7 @@ interface TimesheetSummary {
 }
 
 const TimesheetReportPage = () => {
+    const { t } = useTranslation();
     const [summaries, setSummaries] = useState<TimesheetSummary[]>([]);
     const [loading, setLoading] = useState(false);
     const [selectedMonth, setSelectedMonth] = useState(dayjs());
@@ -38,65 +40,65 @@ const TimesheetReportPage = () => {
             setSummaries(data);
         } catch (error: any) {
             console.error('Failed to fetch timesheet summary:', error);
-            message.error(error.response?.data?.message || 'Không có quyền truy cập hoặc lỗi máy chủ.');
+            message.error(error.response?.data?.message || t('leave.timesheet.fetch_fail', 'Không có quyền truy cập hoặc lỗi máy chủ.'));
         } finally {
             setLoading(false);
         }
     };
 
     const handleExport = () => {
-        message.info('Tính năng xuất file CSV/Excel đang được phát triển.');
+        message.info(t('leave.timesheet.export_developing', 'Tính năng xuất file CSV/Excel đang được phát triển.'));
         // In a real scenario, convert `summaries` to CSV and trigger download
     };
 
     const columns = [
         {
-            title: 'Nhân viên',
+            title: t('leave.timesheet.col_employee', 'Nhân viên'),
             dataIndex: 'userName',
             key: 'userName',
             render: (text: string, record: TimesheetSummary) => (
                 <div>
                     <Text strong>{text}</Text>
-                    <div style={{ fontSize: '12px', color: '#6b7280' }}>{record.department || 'Chưa cập nhật PB'}</div>
+                    <div style={{ fontSize: '12px', color: '#6b7280' }}>{record.department || t('leave.timesheet.department_unset', 'Chưa cập nhật PB')}</div>
                 </div>
             )
         },
         {
-            title: 'Tổng ngày làm',
+            title: t('leave.timesheet.col_total_days', 'Tổng ngày làm'),
             dataIndex: 'totalWorkingDays',
             key: 'totalWorkingDays',
             align: 'center' as const
         },
         {
-            title: 'Đúng giờ',
+            title: t('leave.timesheet.col_ontime', 'Đúng giờ'),
             dataIndex: 'onTimeDays',
             key: 'onTimeDays',
             align: 'center' as const,
             render: (val: number) => <Tag color="success" icon={<CheckCircleOutlined />}>{val}</Tag>
         },
         {
-            title: 'Đi muộn',
+            title: t('leave.timesheet.col_late', 'Đi muộn'),
             dataIndex: 'lateDays',
             key: 'lateDays',
             align: 'center' as const,
             render: (val: number) => val > 0 ? <Tag color="warning" icon={<FieldTimeOutlined />}>{val}</Tag> : <Text type="secondary">-</Text>
         },
         {
-            title: 'Vắng mặt',
+            title: t('leave.timesheet.col_absent', 'Vắng mặt'),
             dataIndex: 'absentDays',
             key: 'absentDays',
             align: 'center' as const,
             render: (val: number) => val > 0 ? <Tag color="error" icon={<WarningOutlined />}>{val}</Tag> : <Text type="secondary">-</Text>
         },
         {
-            title: 'Hiệu suất (Ngày đi làm / Tổng)',
+            title: t('leave.timesheet.col_performance', 'Hiệu suất (Ngày đi làm / Tổng)'),
             key: 'performance',
             render: (_: any, record: TimesheetSummary) => {
                 const percent = Math.round(((record.onTimeDays + record.lateDays) / (record.totalWorkingDays || 1)) * 100);
                 let color = '#10b981';
                 if (percent < 80) color = '#ef4444';
                 else if (percent < 95) color = '#f59e0b';
-                
+
                 return (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <div style={{ flex: 1, backgroundColor: '#e5e7eb', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
@@ -110,8 +112,8 @@ const TimesheetReportPage = () => {
     ];
 
     const totalEmployees = summaries.length;
-    const avgAttendance = totalEmployees > 0 
-        ? Math.round(summaries.reduce((acc, curr) => acc + ((curr.onTimeDays + curr.lateDays) / (curr.totalWorkingDays || 1)), 0) / totalEmployees * 100) 
+    const avgAttendance = totalEmployees > 0
+        ? Math.round(summaries.reduce((acc, curr) => acc + ((curr.onTimeDays + curr.lateDays) / (curr.totalWorkingDays || 1)), 0) / totalEmployees * 100)
         : 0;
     const totalLate = summaries.reduce((acc, curr) => acc + curr.lateDays, 0);
 
@@ -124,19 +126,19 @@ const TimesheetReportPage = () => {
                     <div className={styles.mainContent}>
                         <div className={styles.header}>
                             <div>
-                                <Title level={3} className={styles.pageTitle}>Báo Cáo Bảng Công</Title>
-                                <Text type="secondary">Tổng hợp dữ liệu FaceCheckIn theo tháng</Text>
+                                <Title level={3} className={styles.pageTitle}>{t('leave.timesheet.title', 'Báo Cáo Bảng Công')}</Title>
+                                <Text type="secondary">{t('leave.timesheet.subtitle', 'Tổng hợp dữ liệu FaceCheckIn theo tháng')}</Text>
                             </div>
                             <Space>
-                                <DatePicker 
-                                    picker="month" 
-                                    value={selectedMonth} 
+                                <DatePicker
+                                    picker="month"
+                                    value={selectedMonth}
                                     onChange={(date) => date && setSelectedMonth(date)}
                                     format="MM/YYYY"
                                     allowClear={false}
                                 />
                                 <Button type="primary" icon={<FileExcelOutlined />} onClick={handleExport}>
-                                    Xuất Excel
+                                    {t('leave.timesheet.export_btn', 'Xuất Excel')}
                                 </Button>
                             </Space>
                         </div>
@@ -146,7 +148,7 @@ const TimesheetReportPage = () => {
                             <Card className={styles.statCard} bordered={false}>
                                 <div className={styles.statInfo}>
                                     <div className={styles.statValue}>{totalEmployees}</div>
-                                    <div className={styles.statLabel}>Nhân viên</div>
+                                    <div className={styles.statLabel}>{t('leave.timesheet.stat_employees', 'Nhân viên')}</div>
                                 </div>
                             </Card>
                             <Card className={styles.statCard} bordered={false}>
@@ -154,23 +156,23 @@ const TimesheetReportPage = () => {
                                     <div className={styles.statValue} style={{ color: avgAttendance > 90 ? '#10b981' : '#f59e0b' }}>
                                         {avgAttendance}%
                                     </div>
-                                    <div className={styles.statLabel}>Tỉ lệ đi làm TB</div>
+                                    <div className={styles.statLabel}>{t('leave.timesheet.stat_avg_attendance', 'Tỉ lệ đi làm TB')}</div>
                                 </div>
                             </Card>
                             <Card className={styles.statCard} bordered={false}>
                                 <div className={styles.statInfo}>
                                     <div className={styles.statValue} style={{ color: '#ef4444' }}>{totalLate}</div>
-                                    <div className={styles.statLabel}>Tổng lượt đi muộn</div>
+                                    <div className={styles.statLabel}>{t('leave.timesheet.stat_total_late', 'Tổng lượt đi muộn')}</div>
                                 </div>
                             </Card>
                         </div>
 
                         {/* Timesheet Table */}
-                        <Card className={styles.tableCard} title={`Chi tiết tháng ${selectedMonth.format('MM/YYYY')}`} bordered={false}>
-                            <Table 
-                                columns={columns} 
-                                dataSource={summaries} 
-                                rowKey="userId" 
+                        <Card className={styles.tableCard} title={t('leave.timesheet.detail_title', { month: selectedMonth.format('MM/YYYY'), defaultValue: `Chi tiết tháng ${selectedMonth.format('MM/YYYY')}` })} bordered={false}>
+                            <Table
+                                columns={columns}
+                                dataSource={summaries}
+                                rowKey="userId"
                                 loading={loading}
                                 pagination={{ pageSize: 20 }}
                                 size="middle"
