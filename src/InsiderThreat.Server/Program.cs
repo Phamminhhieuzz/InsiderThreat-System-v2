@@ -97,7 +97,21 @@ builder.Services.AddCors(options =>
 
 // ─── 4. CẤU HÌNH JWT AUTHENTICATION ────────────────────────────────────────
 var jwtSettings = builder.Configuration.GetSection("Jwt");
-var rawKey = jwtSettings["Key"] ?? "InsiderThreatSystem_SuperSecretKey_2024_Security_Update_32Chars";
+// ASP.NET Core map biến môi trường theo quy ước "Jwt__Key" (2 dấu gạch dưới),
+// không phải "JWT_SECRET_KEY" — nên đọc thẳng bằng tên đó để khớp với biến đã
+// đặt trên Render. Không còn khoá viết cứng: production bắt buộc phải có khoá
+// thật, tránh lặp lại lỗi ký token bằng khoá mặc định công khai trong code.
+var rawKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY") ?? jwtSettings["Key"];
+if (string.IsNullOrWhiteSpace(rawKey))
+{
+    if (builder.Environment.IsProduction())
+    {
+        throw new InvalidOperationException(
+            "Thiếu cấu hình JWT. Hãy set biến môi trường JWT_SECRET_KEY (tối thiểu 32 ký tự ngẫu nhiên) trên Render.");
+    }
+    // Fallback chỉ dùng khi chạy Development ở máy local.
+    rawKey = "dev-only-insecure-key-do-not-use-in-production-32chars";
+}
 var key = Encoding.UTF8.GetBytes(rawKey);
 
 builder.Services.AddAuthentication(options =>
