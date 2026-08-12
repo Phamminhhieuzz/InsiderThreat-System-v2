@@ -587,7 +587,15 @@ public class AuthController : ControllerBase
     private string GenerateJwtToken(User user)
     {
         var jwtSettings = _configuration.GetSection("Jwt");
-        var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]!);
+        // Đồng bộ với Program.cs: ưu tiên biến môi trường JWT_SECRET_KEY trên Render,
+        // vì ASP.NET Core không tự map "JWT_SECRET_KEY" vào "Jwt:Key" theo quy ước.
+        var rawKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY") ?? jwtSettings["Key"];
+        if (string.IsNullOrWhiteSpace(rawKey))
+        {
+            throw new InvalidOperationException(
+                "Thiếu cấu hình JWT. Hãy set biến môi trường JWT_SECRET_KEY (tối thiểu 32 ký tự ngẫu nhiên) trên Render.");
+        }
+        var key = Encoding.UTF8.GetBytes(rawKey);
 
         // Normalize role safely (preserve Vietnamese accented characters, only fix casing for known roles)
         string role = (user.Role ?? "User").Trim();
