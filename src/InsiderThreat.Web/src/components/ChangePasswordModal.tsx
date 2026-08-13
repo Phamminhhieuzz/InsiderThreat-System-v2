@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal, Form, Input, Button, message, Typography, List, Space } from 'antd';
+import { Modal, Form, Input, Button, message, Typography, List, Space, theme } from 'antd';
 import { LockOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { api } from '../services/api';
 
@@ -17,6 +17,9 @@ export default function ChangePasswordModal({ visible, username, oldPassword, on
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [passwordValue, setPasswordValue] = useState('');
+    // Token theme của antd tự đổi màu theo chế độ sáng/tối, tránh nền cứng
+    // #f5f5f5 khiến chữ sáng trên nền sáng ở dark mode -> không đọc được.
+    const { token } = theme.useToken();
 
     // Ràng buộc mật khẩu (Regex matching)
     const requirements = [
@@ -90,7 +93,13 @@ export default function ChangePasswordModal({ visible, username, oldPassword, on
                     <Input.Password prefix={<LockOutlined />} placeholder="Nhập lại mật khẩu mới" />
                 </Form.Item>
 
-                <div style={{ padding: '12px', background: '#f5f5f5', borderRadius: 8, marginBottom: 24 }}>
+                <div style={{
+                    padding: '12px',
+                    background: token.colorFillTertiary,
+                    border: `1px solid ${token.colorBorderSecondary}`,
+                    borderRadius: 8,
+                    marginBottom: 24,
+                }}>
                     <Text strong style={{ fontSize: 12 }}>TIÊU CHUẨN BẢO MẬT:</Text>
                     <List
                         size="small"
