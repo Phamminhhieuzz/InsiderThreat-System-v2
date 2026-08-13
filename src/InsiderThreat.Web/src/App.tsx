@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ConfigProvider, theme, App as AntdApp } from 'antd';
+import { ConfigProvider, theme, App as AntdApp, Spin } from 'antd';
 import { setStaticInstances } from './utils/antdStatic';
 
 // Bridge component: captures context-aware antd APIs and stores them globally
@@ -14,34 +14,40 @@ function AntdStaticHolder() {
 import viVN from 'antd/locale/vi_VN';
 import enUS from 'antd/locale/en_US';
 import { useTranslation } from 'react-i18next';
+
+// LoginPage tải ngay vì là trang đầu tiên người dùng thấy — không lazy để
+// tránh chớp màn hình loading khi mới vào. Mọi trang còn lại được lazy-load:
+// mỗi trang thành 1 file riêng, chỉ tải khi người dùng thực sự vào trang đó.
+// Nhờ vậy thư viện AI nhận diện khuôn mặt (nặng nhất) chỉ tải ở trang Face ID,
+// không còn nằm chung trong file khởi động khiến web tải chậm.
 import LoginPage from './pages/LoginPage';
-import DashboardPage from './pages/DashboardPage';
-import UsbMonitorPage from './pages/UsbMonitorPage';
-import DocumentsPage from './pages/DocumentsPage';
-import FaceLoginPage from './pages/FaceLoginPage';
-import ForgotPasswordPage from './pages/ForgotPasswordPage';
-import FeedPage from './pages/FeedPage';
-import ChatPage from './pages/ChatPage';
-import ProfilePage from './pages/ProfilePage';
-import SurveyPage from './pages/Survey/SurveyPage';
-import StaffPage from './pages/StaffPage';
-import GroupsPage from './pages/GroupsPage';
-import GroupDetailPage from './pages/GroupDetailPage';
-import InboxPage from './pages/InboxPage';
-import LibraryPage from './pages/LibraryPage';
-import SocialAttendancePage from './pages/SocialAttendancePage';
-import MeetPage from './pages/MeetPage';
-import MonitorLogsPage from './pages/MonitorLogsPage';
-import WatchdogPage from './pages/WatchdogPage';
-import SecurityApprovalsPage from './pages/SecurityApprovalsPage';
-import ProjectsPage from './pages/ProjectsPage';
-import ProjectDetailPage from './pages/ProjectDetailPage';
-import OrgChartPage from './pages/OrgChart/OrgChartPage';
-import OrgChartConfigPage from './pages/Admin/OrgChartConfigPage';
-import MyLeavePage from './pages/LeaveManagement/MyLeavePage';
-import LeaveApprovalsPage from './pages/LeaveManagement/LeaveApprovalsPage';
-import TimesheetReportPage from './pages/LeaveManagement/TimesheetReportPage';
-import WorkspacePage from './pages/WorkspacePage';
+
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const UsbMonitorPage = lazy(() => import('./pages/UsbMonitorPage'));
+const DocumentsPage = lazy(() => import('./pages/DocumentsPage'));
+const FaceLoginPage = lazy(() => import('./pages/FaceLoginPage'));
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
+const FeedPage = lazy(() => import('./pages/FeedPage'));
+const ChatPage = lazy(() => import('./pages/ChatPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const SurveyPage = lazy(() => import('./pages/Survey/SurveyPage'));
+const StaffPage = lazy(() => import('./pages/StaffPage'));
+const GroupsPage = lazy(() => import('./pages/GroupsPage'));
+const GroupDetailPage = lazy(() => import('./pages/GroupDetailPage'));
+const InboxPage = lazy(() => import('./pages/InboxPage'));
+const LibraryPage = lazy(() => import('./pages/LibraryPage'));
+const SocialAttendancePage = lazy(() => import('./pages/SocialAttendancePage'));
+const MeetPage = lazy(() => import('./pages/MeetPage'));
+const SecurityApprovalsPage = lazy(() => import('./pages/SecurityApprovalsPage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
+const OrgChartPage = lazy(() => import('./pages/OrgChart/OrgChartPage'));
+const OrgChartConfigPage = lazy(() => import('./pages/Admin/OrgChartConfigPage'));
+const MyLeavePage = lazy(() => import('./pages/LeaveManagement/MyLeavePage'));
+const LeaveApprovalsPage = lazy(() => import('./pages/LeaveManagement/LeaveApprovalsPage'));
+const TimesheetReportPage = lazy(() => import('./pages/LeaveManagement/TimesheetReportPage'));
+const WorkspacePage = lazy(() => import('./pages/WorkspacePage'));
+
 import { NotificationProvider } from './contexts/NotificationContext';
 import NotificationToast from './components/NotificationToast';
 import { ChatWidget } from './components/ChatWidget';
@@ -49,6 +55,15 @@ import UsbNotification from './components/UsbNotification';
 import MonitorNotification from './components/MonitorNotification';
 import { useTheme } from './context/ThemeContext';
 import './App.css';
+
+// Màn chờ khi trang lazy đang được tải về.
+function PageLoader() {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <Spin size="large" />
+    </div>
+  );
+}
 
 // Component bảo vệ route - kiểm tra đăng nhập
 function PrivateRoute({ children }: { children: React.ReactNode }) {
@@ -104,6 +119,7 @@ function App() {
         <AntdStaticHolder />
         <BrowserRouter>
           <NotificationProvider>
+            <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/face-login" element={<FaceLoginPage />} />
@@ -137,6 +153,7 @@ function App() {
               <Route path="/" element={<RoleBasedRedirect />} />
               <Route path="*" element={<RoleBasedRedirect />} />
             </Routes>
+            </Suspense>
             {/* Global components */}
             <NotificationToast />
             {isLoggedIn && <ChatWidget />}
