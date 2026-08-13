@@ -9,25 +9,25 @@ export default defineConfig({
     chunkSizeWarningLimit: 1500,
     rollupOptions: {
       output: {
-        // Tách các thư viện lớn thành file riêng để:
-        //  - Trình duyệt cache lại được (đổi code app không phải tải lại vendor)
-        //  - Tải song song nhiều file nhỏ thay vì 1 file khổng lồ
-        // LƯU Ý: gom TẤT CẢ tensorflow + face-api vào CÙNG một chunk. Nếu tách
-        // rời các gói @tensorflow/* ra nhiều chunk, chúng đăng ký trùng kernel
-        // và gây treo 10 phút lúc khởi tạo (xem ghi chú ở phần dedupe bên dưới).
+        // CHỈ tách riêng thư viện AI nặng nhất (tensorflow + face-api, ~2.1MB).
+        // Chúng độc lập, KHÔNG phụ thuộc React nên tách an toàn, và nhờ vậy
+        // chỉ được tải khi vào trang Face ID (trang này đã lazy-load).
+        //
+        // KHÔNG tự tách React/antd/vendor thành chunk riêng: khi làm vậy, các
+        // thư viện (như antd) gọi React.createContext lúc khởi tạo nhưng React
+        // nằm ở chunk khác chưa load kịp -> lỗi "reading 'createContext'",
+        // trang trắng tinh. Việc chia nhỏ phần còn lại để cho Rollup tự lo
+        // theo cây import của các trang lazy — vừa đủ và an toàn.
+        //
+        // Gom TẤT CẢ @tensorflow vào cùng chunk với face-api: tách rời các gói
+        // @tensorflow/* gây đăng ký trùng kernel -> treo 10 phút (xem dedupe).
         manualChunks(id) {
-          if (!id.includes('node_modules')) return;
-          if (id.includes('@tensorflow') || id.includes('@vladmandic/face-api')) {
+          if (
+            id.includes('node_modules') &&
+            (id.includes('@tensorflow') || id.includes('@vladmandic/face-api'))
+          ) {
             return 'vendor-face-ai';
           }
-          if (id.includes('antd') || id.includes('@ant-design') || id.includes('rc-')) {
-            return 'vendor-antd';
-          }
-          if (id.includes('react-router') || id.includes('/react-dom/') || id.includes('/react/')) {
-            return 'vendor-react';
-          }
-          if (id.includes('@microsoft/signalr')) return 'vendor-signalr';
-          return 'vendor';
         },
       },
     },
