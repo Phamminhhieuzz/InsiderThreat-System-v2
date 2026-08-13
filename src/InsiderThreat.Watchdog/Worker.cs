@@ -24,10 +24,49 @@ public class Worker : BackgroundService
         _configuration = configuration;
 
         _processName = _configuration["WatchdogConfig:ProcessName"] ?? "InsiderThreat.MonitorAgent";
-        _agentPath = @"C:\secu\src\InsiderThreat.MonitorAgent\bin\Debug\net8.0-windows\InsiderThreat.MonitorAgent.exe";
+        _agentPath = ResolveAgentPath(_configuration["WatchdogConfig:AgentPath"]);
         _serverUrl = _configuration["WatchdogConfig:ServerUrl"] ?? "http://localhost:5038";
 
         _httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
+    }
+
+    /// <summary>
+    /// Tìm đường dẫn tới MonitorAgent. Trước đây hàm khởi tạo hardcode một đường
+    /// dẫn tuyệt đối trỏ vào thư mục Debug trên máy của một lập trình viên
+    /// (C:\secu\...), nên trên mọi máy khác Watchdog luôn báo "Agent executable
+    /// not found" và không bao giờ khởi động lại được agent — tức là mất hoàn
+    /// toàn tác dụng. Nay ưu tiên cấu hình, sau đó thử các vị trí tương đối,
+    /// giống cách MonitorAgent đang tìm ngược lại Watchdog.
+    /// </summary>
+    private string ResolveAgentPath(string? configuredPath)
+    {
+        const string exeName = "InsiderThreat.MonitorAgent.exe";
+        var baseDir = AppContext.BaseDirectory;
+
+        var candidates = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(configuredPath))
+        {
+            candidates.Add(Path.IsPathRooted(configuredPath)
+                ? configuredPath
+                : Path.GetFullPath(Path.Combine(baseDir, configuredPath)));
+        }
+
+        // Cùng thư mục với Watchdog.
+        candidates.Add(Path.Combine(baseDir, exeName));
+        // Watchdog nằm trong thư mục con "watchdog" của agent (bố trí mặc định
+        // theo AgentConfig:WatchdogPath bên MonitorAgent).
+        candidates.Add(Path.GetFullPath(Path.Combine(baseDir, "..", exeName)));
+        // Hai project nằm cạnh nhau.
+        candidates.Add(Path.GetFullPath(Path.Combine(baseDir, "..", "InsiderThreat.MonitorAgent", exeName)));
+
+        foreach (var path in candidates)
+        {
+            if (File.Exists(path)) return path;
+        }
+
+        // Không tìm thấy: trả về ứng viên đầu tiên để log hiển thị đúng nơi đã tìm.
+        return candidates[0];
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
