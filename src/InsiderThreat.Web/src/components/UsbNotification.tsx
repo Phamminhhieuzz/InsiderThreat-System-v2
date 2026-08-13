@@ -88,7 +88,9 @@ function UsbNotification({ userRole }: UsbNotificationProps) {
             try {
                 await api.post<Device>('/api/devices', {
                     deviceId: alert.deviceId,
-                    deviceName: alert.deviceName,
+                    // Server doc truong "name" (model Device). Truoc day chi gui
+                    // "deviceName" nen ten thiet bi bi mat khi luu vao whitelist.
+                    name: alert.deviceName,
                     description: `Approved via Notification from ${alert.computerName}`,
                     isAllowed: true,
                 });

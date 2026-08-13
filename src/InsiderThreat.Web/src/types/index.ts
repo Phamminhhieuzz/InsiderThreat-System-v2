@@ -32,13 +32,16 @@ export interface LogEntry {
     timestamp: string;
 }
 
+// Khớp với model Device phía server (InsiderThreat.Shared/Device.cs).
+// Server serialize ra "name" va "createdAt" — KHONG phai "deviceName"/"addedAt".
+// Sai ten truong o day khien bang whitelist hien cot Thiet bi trong va Ngay them = N/A.
 export interface Device {
     id?: string;
     deviceId: string;
-    deviceName: string;
+    name: string;
     description?: string;
     isAllowed: boolean;
-    addedAt?: string;
+    createdAt?: string;
 }
 
 export interface UsbAlert {

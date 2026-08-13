@@ -5,6 +5,26 @@ import { api } from '../services/api';
 import type { Device } from '../types';
 import type { ColumnsType } from 'antd/es/table';
 
+// Mã định danh phần cứng USB có 2 dạng tuỳ nguồn phát hiện:
+//  - Thiết bị USB thường:  ...VID_0951&PID_1666...      (từ SetupAPI/hardware id)
+//  - Ổ đĩa USB (USBSTOR):  ...VEN_VendorCo&PROD_...     (từ Win32_DiskDrive mà agent dùng)
+// Trước đây chỉ tách theo VID/PID nên mọi USB lưu trữ đều hiện "????:????".
+function formatDeviceCode(deviceId?: string): string {
+    if (!deviceId) return 'N/A';
+
+    const vid = deviceId.match(/VID_([0-9A-F]{4})/i);
+    const pid = deviceId.match(/PID_([0-9A-F]{4})/i);
+    if (vid && pid) return `${vid[1]}:${pid[1]}`;
+
+    const ven = deviceId.match(/VEN_([^&\\]+)/i);
+    const prod = deviceId.match(/PROD_([^&\\]+)/i);
+    if (ven || prod) return `${ven?.[1] ?? '?'}:${prod?.[1] ?? '?'}`;
+
+    // Không khớp định dạng nào — hiện phần cuối của ID còn hơn là "????:????".
+    const tail = deviceId.split('\\').pop() ?? deviceId;
+    return tail.length > 24 ? `${tail.slice(0, 24)}…` : tail;
+}
+
 function WhitelistTable() {
     const [loading, setLoading] = useState(false);
     const [devices, setDevices] = useState<Device[]>([]);
@@ -50,26 +70,22 @@ function WhitelistTable() {
     const columns: ColumnsType<Device> = [
         {
             title: 'Thiết bị',
-            dataIndex: 'deviceName',
-            key: 'deviceName',
+            dataIndex: 'name',
+            key: 'name',
             render: (name: string) => (
                 <Space>
                     <UsbOutlined style={{ color: '#52c41a' }} />
-                    <strong>{name}</strong>
+                    <strong>{name || 'Không rõ tên'}</strong>
                 </Space>
             ),
         },
         {
-            title: 'VID/PID',
+            title: 'Mã thiết bị',
             dataIndex: 'deviceId',
             key: 'deviceId',
-            render: (deviceId: string) => {
-                const vidMatch = deviceId.match(/VID_([0-9A-F]{4})/i);
-                const pidMatch = deviceId.match(/PID_([0-9A-F]{4})/i);
-                const vid = vidMatch ? vidMatch[1] : '????';
-                const pid = pidMatch ? pidMatch[1] : '????';
-                return <Tag color="green">{`${vid}:${pid}`}</Tag>;
-            },
+            render: (deviceId: string) => (
+                <Tag color="green">{formatDeviceCode(deviceId)}</Tag>
+            ),
         },
         {
             title: 'Mô tả',
@@ -78,10 +94,10 @@ function WhitelistTable() {
         },
         {
             title: 'Ngày thêm',
-            dataIndex: 'addedAt',
-            key: 'addedAt',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
             render: (date: string) =>
-                date ? new Date(date).toLocaleDateString('vi-VN') : 'N/A',
+                date ? new Date(date).toLocaleString('vi-VN') : 'N/A',
         },
         {
             title: 'Thao tác',
@@ -89,8 +105,8 @@ function WhitelistTable() {
             render: (_: any, record: Device) => (
                 <Popconfirm
                     title="Xác nhận xóa"
-                    description={`Bạn có chắc muốn xóa "${record.deviceName}" khỏi whitelist?`}
-                    onConfirm={() => record.id && handleRemove(record.id, record.deviceName)}
+                    description={`Bạn có chắc muốn xóa "${record.name}" khỏi whitelist?`}
+                    onConfirm={() => record.id && handleRemove(record.id, record.name)}
                     okText="Xóa"
                     cancelText="Hủy"
                     okButtonProps={{ danger: true }}
@@ -119,11 +135,8 @@ function WhitelistTable() {
                     ) : (
                         <div className="incident-cards-container">
                             {devices.map(device => {
-                                const vidMatch = device.deviceId?.match(/VID_([0-9A-F]{4})/i);
-                                const pidMatch = device.deviceId?.match(/PID_([0-9A-F]{4})/i);
-                                const vid = vidMatch ? vidMatch[1] : '????';
-                                const pid = pidMatch ? pidMatch[1] : '????';
-                                
+                                const deviceCode = formatDeviceCode(device.deviceId);
+
                                 return (
                                     <div key={device.deviceId} className="incident-card">
                                         <div className="severity-bar" style={{ backgroundColor: '#52c41a' }} />
@@ -133,16 +146,16 @@ function WhitelistTable() {
                                                     WHITELISTED
                                                 </div>
                                                 <span className="time-ago">
-                                                    {device.addedAt ? new Date(device.addedAt).toLocaleDateString('vi-VN') : 'N/A'}
+                                                    {device.createdAt ? new Date(device.createdAt).toLocaleString('vi-VN') : 'N/A'}
                                                 </span>
                                             </div>
 
                                             <div className="device-info">
                                                 <span className="material-symbols-outlined device-icon" style={{ color: '#52c41a' }}>usb_off</span>
                                                 <div className="device-details">
-                                                    <h3 className="device-name">{device.deviceName}</h3>
+                                                    <h3 className="device-name">{device.name || 'Không rõ tên'}</h3>
                                                     <p className="incident-desc">
-                                                        VID/PID: <Tag color="green" style={{ margin: 0 }}>{vid}:{pid}</Tag>
+                                                        Mã thiết bị: <Tag color="green" style={{ margin: 0 }}>{deviceCode}</Tag>
                                                     </p>
                                                     <p className="incident-desc" style={{ marginTop: 4 }}>
                                                         {device.description}
@@ -153,8 +166,8 @@ function WhitelistTable() {
                                             <div className="incident-actions">
                                                 <Popconfirm
                                                     title="Xác nhận xóa"
-                                                    description={`Bạn có chắc muốn xóa "${device.deviceName}" khỏi whitelist?`}
-                                                    onConfirm={() => device.id && handleRemove(device.id, device.deviceName)}
+                                                    description={`Bạn có chắc muốn xóa "${device.name}" khỏi whitelist?`}
+                                                    onConfirm={() => device.id && handleRemove(device.id, device.name)}
                                                     okText="Xóa"
                                                     cancelText="Hủy"
                                                     okButtonProps={{ danger: true }}
