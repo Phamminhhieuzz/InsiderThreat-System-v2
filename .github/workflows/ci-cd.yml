@@ -134,13 +134,21 @@ jobs:
               echo "Bo qua $name: chua cau hinh service id."
               return 0
             fi
-            # 200 = vua resume xong. 409 = von da dang chay. Ca hai deu OK.
-            code=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            body=$(mktemp)
+            code=$(curl -s -o "$body" -w "%{http_code}" -X POST \
               -H "Authorization: Bearer $RENDER_API_KEY" \
+              -H "Accept: application/json" \
               "https://api.render.com/v1/services/$id/resume")
+            echo "[$name] HTTP $code — $(cat "$body")"
             case "$code" in
-              200|409) echo "$name san sang (HTTP $code)." ;;
-              *) echo "::error::Khong resume duoc $name (HTTP $code)."; return 1 ;;
+              # 2xx: vua resume xong (Render co the tra 200 hoac 202).
+              2*) echo "[$name] Da resume thanh cong." ;;
+              # Render tu choi vi service KHONG bi suspend, tuc la von da chay.
+              # Day chinh la ket qua mong muon, khong phai loi.
+              400|409|422) echo "[$name] Service da dang chay san — khong can resume." ;;
+              401|403) echo "::error::[$name] RENDER_API_KEY sai hoac khong du quyen (HTTP $code)."; return 1 ;;
+              404) echo "::error::[$name] Sai service id (HTTP 404). Kiem tra secret RENDER_SERVICE_ID_*."; return 1 ;;
+              *) echo "::error::[$name] Loi khong xac dinh (HTTP $code)."; return 1 ;;
             esac
           }
           resume "$BACKEND_ID" "backend"
