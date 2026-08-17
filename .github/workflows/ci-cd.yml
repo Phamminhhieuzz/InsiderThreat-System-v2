@@ -80,7 +80,7 @@ jobs:
       # cần build image. Đây là phần thay thế miễn phí cho BlackDuck (SCA —
       # phát hiện thư viện dính CVE đã biết) mà repo cá nhân không có license.
       - name: Trivy filesystem scan
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: "fs"
           scan-ref: "."
@@ -112,7 +112,7 @@ jobs:
         run: docker build -t insiderthreat-server:ci .
 
       - name: Trivy image scan
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: "insiderthreat-server:ci"
           format: "sarif"
