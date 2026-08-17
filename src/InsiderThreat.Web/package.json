@@ -23,7 +23,7 @@
     "@tensorflow/tfjs-core": "^4.22.0",
     "@vladmandic/face-api": "^1.7.15",
     "antd": "^6.2.2",
-    "axios": "^1.13.4",
+    "axios": "^1.19.0",
     "docx-preview": "^0.3.7",
     "framer-motion": "^12.38.0",
     "i18next": "^25.10.5",
