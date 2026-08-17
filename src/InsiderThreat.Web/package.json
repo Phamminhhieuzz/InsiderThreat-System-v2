@@ -24,7 +24,7 @@
     "@vladmandic/face-api": "^1.7.15",
     "antd": "^6.2.2",
     "axios": "^1.13.4",
-    "docx-preview": "^0.3.7",
+    "docx-preview": "^0.4.0",
     "framer-motion": "^12.38.0",
     "i18next": "^25.10.5",
     "i18next-browser-languagedetector": "^8.2.1",
