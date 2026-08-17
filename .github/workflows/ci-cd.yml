@@ -186,7 +186,13 @@ jobs:
         run: sleep 90
 
       - name: OWASP ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.12.0
+        # v0.12.0 tung dung, bi loi that: "Create Artifact Container failed:
+        # the artifact name ... is not valid" (HTTP 400) — day la loi da biet
+        # cua chinh action nay, dung API upload-artifact cu da bi GitHub khai
+        # tu. Maintainer xac nhan: nang len ban moi hon la du de sua
+        # (github.com/zaproxy/action-baseline/issues/134). v0.14.0 tro len
+        # da doi sang API moi.
+        uses: zaproxy/action-baseline@v0.15.0
         with:
           target: "https://insiderthreat-web.onrender.com"
           # fail_action: false — job này GIÁM SÁT, không chặn deploy (deploy
