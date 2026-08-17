@@ -1,0 +1,22 @@
+version: 2
+updates:
+  # NuGet — báo cáo và tự tạo PR khi thư viện .NET dính CVE đã biết. Đây là
+  # lớp SCA miễn phí, thay thế phần "cảnh báo lỗ hổng thư viện" mà BlackDuck
+  # trả phí cung cấp — repo cá nhân không có license BlackDuck.
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # npm — frontend
+  - package-ecosystem: "npm"
+    directory: "/src/InsiderThreat.Web"
+    schedule:
+      interval: "weekly"
+
+  # GitHub Actions chính CI/CD dùng — cũng có thể dính CVE (như lỗi
+  # action-baseline@v0.12.0 đã gặp ở job DAST).
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

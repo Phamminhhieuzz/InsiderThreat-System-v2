@@ -68,6 +68,105 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_ENABLE_SUMMARY: true
 
+  trivy-fs:
+    name: Trivy — SCA & IaC scan (filesystem)
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # Quét dependency (npm + NuGet) và Dockerfile ngay trên mã nguồn, không
+      # cần build image. Đây là phần thay thế miễn phí cho BlackDuck (SCA —
+      # phát hiện thư viện dính CVE đã biết) mà repo cá nhân không có license.
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: "fs"
+          scan-ref: "."
+          format: "sarif"
+          output: "trivy-fs.sarif"
+          severity: "CRITICAL,HIGH,MEDIUM"
+          # exit-code 0: giống dast, chạy ở chế độ giám sát (báo cáo lên tab
+          # Security) trước, chưa chặn deploy. Sau khi xem đợt quét đầu, nếu
+          # không có báo động giả tràn lan thì sẽ nâng lên chặn cứng cho
+          # CRITICAL/HIGH.
+          exit-code: "0"
+
+      - name: Upload Trivy fs results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-fs.sarif"
+          category: "trivy-fs"
+
+  trivy-image:
+    name: Trivy — Docker image scan
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image (không push, chỉ để quét)
+        run: docker build -t insiderthreat-server:ci .
+
+      - name: Trivy image scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: "insiderthreat-server:ci"
+          format: "sarif"
+          output: "trivy-image.sarif"
+          severity: "CRITICAL,HIGH,MEDIUM"
+          exit-code: "0"
+
+      - name: Upload Trivy image results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-image.sarif"
+          category: "trivy-image"
+
+  sonarcloud:
+    name: SonarCloud (SAST + Code Quality)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # SonarCloud cần tạo tài khoản + token thủ công (không thể tự động hoá
+      # bằng script — đây là hành động tạo tài khoản, ngoài phạm vi cho phép
+      # của agent). Nếu chưa cấu hình SONAR_TOKEN, bước này tự bỏ qua để
+      # không làm đỏ pipeline của người khác chưa kịp setup.
+      - name: Kiểm tra đã cấu hình SONAR_TOKEN chưa
+        id: check
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -z "$SONAR_TOKEN" ]; then
+            echo "Chua cau hinh SONAR_TOKEN — bo qua SonarCloud scan."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-dotnet@v4
+        if: steps.check.outputs.run == 'true'
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: SonarCloud Scan
+        if: steps.check.outputs.run == 'true'
+        uses: SonarSource/sonarcloud-github-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+
   codeql:
     name: CodeQL (${{ matrix.language }})
     runs-on: ubuntu-latest
