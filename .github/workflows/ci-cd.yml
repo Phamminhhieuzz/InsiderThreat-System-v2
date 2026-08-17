@@ -169,3 +169,33 @@ jobs:
             exit 1
           fi
           curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}"
+
+  dast:
+    name: DAST Scan (OWASP ZAP Baseline)
+    runs-on: ubuntu-latest
+    # Chạy SAU KHI deploy xong, không phải trước — DAST cần app đang sống để
+    # quét (khác SAST ở trên chỉ đọc mã nguồn tĩnh). Đây là Phương án A trong
+    # báo cáo DAST: giám sát liên tục sau deploy, chưa phải gate chặn cứng
+    # trước deploy (cần môi trường Staging riêng mới làm được Phương án B).
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [deploy]
+    steps:
+      - name: Đợi Render deploy xong trước khi quét
+        # Deploy Hook chỉ TRIGGER deploy, không đợi nó chạy xong. Đợi một
+        # khoảng cố định để tránh quét nhầm bản cũ vẫn còn đang chạy.
+        run: sleep 90
+
+      - name: OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: "https://insiderthreat-web.onrender.com"
+          # fail_action: false — job này GIÁM SÁT, không chặn deploy (deploy
+          # đã chạy xong ở job trước rồi). Baseline Scan có nhiều cảnh báo
+          # Low/Informational đã được đánh giá là rủi ro chấp nhận được (xem
+          # báo cáo DAST mục 4-5); chặn cứng theo mọi WARN sẽ khiến pipeline
+          # đỏ liên tục dù không có lỗ hổng nghiêm trọng nào. Khi hệ thống có
+          # môi trường Staging, nâng cấp lên Phương án B để DAST thật sự
+          # chặn được lỗi TRƯỚC khi lên production.
+          fail_action: false
+          allow_issue_writing: false
+          artifact_name: "zap-baseline-report"
