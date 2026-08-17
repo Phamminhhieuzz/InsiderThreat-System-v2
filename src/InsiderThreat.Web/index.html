@@ -31,16 +31,10 @@
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 
-  <!-- PWA Service Worker Registration -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('PWA Service Worker registered'))
-          .catch(err => console.log('PWA Service Worker failed', err));
-      });
-    }
-  </script>
+  <!-- PWA Service Worker Registration — tách ra file riêng (register-sw.js) thay
+       vì để inline, để bật Content-Security-Policy chặt (script-src 'self')
+       mà không cần cho phép 'unsafe-inline'. -->
+  <script src="/register-sw.js"></script>
 </body>
 
 </html>
