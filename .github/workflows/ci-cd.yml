@@ -79,7 +79,9 @@ jobs:
       # Quét dependency (npm + NuGet) và Dockerfile ngay trên mã nguồn, không
       # cần build image. Đây là phần thay thế miễn phí cho BlackDuck (SCA —
       # phát hiện thư viện dính CVE đã biết) mà repo cá nhân không có license.
-      - name: Trivy filesystem scan
+      # Bước 1: BÁO CÁO — quét đủ mọi mức độ, không chặn (exit-code 0), chỉ để
+      # ghi đầy đủ dữ liệu lên tab Security cho việc theo dõi/audit lâu dài.
+      - name: Trivy filesystem scan (báo cáo đầy đủ)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: "fs"
@@ -87,10 +89,6 @@ jobs:
           format: "sarif"
           output: "trivy-fs.sarif"
           severity: "CRITICAL,HIGH,MEDIUM"
-          # exit-code 0: giống dast, chạy ở chế độ giám sát (báo cáo lên tab
-          # Security) trước, chưa chặn deploy. Sau khi xem đợt quét đầu, nếu
-          # không có báo động giả tràn lan thì sẽ nâng lên chặn cứng cho
-          # CRITICAL/HIGH.
           exit-code: "0"
 
       - name: Upload Trivy fs results to GitHub Security tab
@@ -99,6 +97,20 @@ jobs:
         with:
           sarif_file: "trivy-fs.sarif"
           category: "trivy-fs"
+
+      # Bước 2: CỔNG CHẶN THẬT — chỉ soi CRITICAL/HIGH, exit-code 1 khiến job
+      # (và do đó cả job "deploy" phía sau, vì deploy needs: [..., trivy-fs])
+      # thất bại nếu có lỗ hổng nghiêm trọng CHƯA VÁ trong dependency hoặc
+      # Dockerfile. Đây chính là Phương án B thật sự (DAST/SCA chặn TRƯỚC khi
+      # lên production), không còn là giám sát suông nữa.
+      - name: Trivy filesystem gate — chặn CRITICAL/HIGH
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: "fs"
+          scan-ref: "."
+          format: "table"
+          severity: "CRITICAL,HIGH"
+          exit-code: "1"
 
   trivy-image:
     name: Trivy — Docker image scan
@@ -111,7 +123,7 @@ jobs:
       - name: Build image (không push, chỉ để quét)
         run: docker build -t insiderthreat-server:ci .
 
-      - name: Trivy image scan
+      - name: Trivy image scan (báo cáo đầy đủ)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: "insiderthreat-server:ci"
@@ -126,6 +138,14 @@ jobs:
         with:
           sarif_file: "trivy-image.sarif"
           category: "trivy-image"
+
+      - name: Trivy image gate — chặn CRITICAL/HIGH
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: "insiderthreat-server:ci"
+          format: "table"
+          severity: "CRITICAL,HIGH"
+          exit-code: "1"
 
   sonarcloud:
     name: SonarCloud (SAST + Code Quality)
@@ -208,7 +228,10 @@ jobs:
     # sau khi build backend/frontend, quét secret, và CodeQL đều pass. Một job
     # nào ở trên fail thì bước này không chạy — code lỗi không lên production.
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [backend, frontend, secret-scan, codeql]
+    # Thêm trivy-fs, trivy-image vào needs: có lỗ hổng CRITICAL/HIGH chưa vá
+    # trong dependency hoặc Docker image thì deploy KHÔNG được chạy — đây là
+    # điểm khác biệt giữa "giám sát" và "chặn thật" trong DevSecOps.
+    needs: [backend, frontend, secret-scan, codeql, trivy-fs, trivy-image]
     steps:
       # Deploy Hook KHÔNG đánh thức được service đang Suspended (Render trả 409).
       # Muốn tự động bật lại thì phải gọi Render REST API bằng API key.
