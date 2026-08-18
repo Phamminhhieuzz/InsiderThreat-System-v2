@@ -228,10 +228,12 @@ jobs:
     # sau khi build backend/frontend, quét secret, và CodeQL đều pass. Một job
     # nào ở trên fail thì bước này không chạy — code lỗi không lên production.
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    # Thêm trivy-fs, trivy-image vào needs: có lỗ hổng CRITICAL/HIGH chưa vá
-    # trong dependency hoặc Docker image thì deploy KHÔNG được chạy — đây là
-    # điểm khác biệt giữa "giám sát" và "chặn thật" trong DevSecOps.
-    needs: [backend, frontend, secret-scan, codeql, trivy-fs, trivy-image]
+    # Thêm trivy-fs, trivy-image, sonarcloud vào needs: có lỗ hổng CRITICAL/HIGH
+    # chưa vá trong dependency/Docker image, HOẶC SonarCloud Quality Gate fail,
+    # thì deploy KHÔNG được chạy — đây là điểm khác biệt giữa "giám sát" và
+    # "chặn thật" trong DevSecOps.
+    needs:
+      [backend, frontend, secret-scan, codeql, trivy-fs, trivy-image, sonarcloud]
     steps:
       # Deploy Hook KHÔNG đánh thức được service đang Suspended (Render trả 409).
       # Muốn tự động bật lại thì phải gọi Render REST API bằng API key.
